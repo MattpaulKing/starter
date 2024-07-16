@@ -1,10 +1,10 @@
 <script lang="ts">
-	import FormContainer from '$lib/forms/components/FormContainer.svelte';
 	import { superForm } from 'sveltekit-superforms';
 	import { route } from '$lib/ROUTES.js';
 	import { defaultFormOptions } from '$lib/forms/setForm.js';
 	import { Errors, Input, Field, Label } from '$lib/forms/inputs';
 	import { loginSchema } from '../lib/schemas/loginSchema.js';
+	import { FormContainer, FormTitle } from '$lib/forms/index.js';
 
 	let { data } = $props();
 	const form = superForm(data.loginForm, {
@@ -14,6 +14,7 @@
 
 <div class="mx-auto flex flex-col w-full items-center h-full justify-center">
 	<FormContainer class="min-w-96" {form} action={route('signin /auth/login')}>
+		<FormTitle>Welcome Back!</FormTitle>
 		<div class="flex flex-col col-span-2 h-full">
 			<Field {form} path="email">
 				<Label label="Email" />
