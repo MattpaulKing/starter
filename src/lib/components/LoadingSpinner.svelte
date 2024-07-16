@@ -1,17 +1,17 @@
+<script lang="ts">
+	let { class: classes }: { class?: string } = $props();
+</script>
+
 <div class="absolute z-50 flex flex-col justify-center items-center h-full w-full">
-	<div class="loader"></div>
+	<div
+		class="loader animate-spin before:absolute before:inset-0 before:rounded-full before:border-4
+      before:animate-[spin] before:ease-linear before:duration-[infinite]
+    ease-linear duration-[infinite] rounded-full relative {classes ?? 'h-10 w-10'} aspect-square"
+	></div>
 	<div class="absolute h-full w-full bg-surface-50-900-token opacity-25"></div>
 </div>
 
 <style>
-	.loader {
-		width: 48px;
-		height: 48px;
-		border-radius: 50%;
-		position: relative;
-		animation: rotate 1s linear infinite;
-		opacity: 1 !important;
-	}
 	.loader::before {
 		content: '';
 		box-sizing: border-box;
