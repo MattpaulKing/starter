@@ -6,7 +6,7 @@
 	<div
 		class="loader animate-spin before:absolute before:inset-0 before:rounded-full before:border-4
       before:animate-[spin] before:ease-linear before:duration-[infinite]
-    ease-linear duration-[infinite] rounded-full relative {classes ?? 'h-10 w-10'} aspect-square"
+      ease-linear duration-[infinite] rounded-full relative {classes ?? 'h-10 w-10'} aspect-square"
 	></div>
 	<div class="absolute h-full w-full bg-surface-50-900-token opacity-25"></div>
 </div>

@@ -2,9 +2,9 @@
 	import '../app.css';
 	import { Modal, setModalStore } from '$lib/components/Modal';
 	import { Toast, setToaster } from '$lib/components/Toaster';
-	import { Breadcrumb, List, Avatar, Popover, LoadingSpinner, AnchorSlider } from '$lib/components';
+	import { Breadcrumb, List, Avatar, Popover, LoadingSpinner } from '$lib/components';
 	import { slide } from 'svelte/transition';
-	import { afterNavigate, beforeNavigate } from '$app/navigation';
+	import { beforeNavigate } from '$app/navigation';
 
 	setToaster();
 	setModalStore();
@@ -13,13 +13,14 @@
 	let slowNav = $state(false);
 	let navDelay: ReturnType<typeof setTimeout>;
 
-	beforeNavigate((nav) => {
+	beforeNavigate(async (nav) => {
 		navDelay = setTimeout(() => {
 			slowNav = true;
 		}, 300);
-		afterNavigate((nav) => {
-			slowNav = false;
-			clearTimeout(navDelay);
+		await nav.complete.then(() => {
+			if (navDelay) {
+				clearTimeout(navDelay);
+			}
 		});
 	});
 	let { children } = $props();
@@ -39,7 +40,10 @@
 			</div>
 		{:else}
 			<Popover class="h-9" bind:popoverOpen={userMenuOpen}>
-				<button onclick={() => (userMenuOpen = !userMenuOpen)}>
+				<button
+					onpointerenter={() => (userMenuOpen = true)}
+					onclick={() => (userMenuOpen = !userMenuOpen)}
+				>
 					<Avatar
 						initials="MK"
 						class="{userMenuOpen
