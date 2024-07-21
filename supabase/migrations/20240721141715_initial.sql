@@ -1,3 +1,10 @@
+create table posts (
+  id uuid default gen_random_uuid() primary key,
+  "createdAt" timestamptz default CURRENT_TIMESTAMP not null,
+  label text not null,
+  content text not null
+);
+
 create table user_settings (
   "userId" uuid primary key,
   "tableRows" int default 5 not null,
@@ -7,9 +14,25 @@ create table user_settings (
 );
 
 create table profiles (
-  "userId" uuid primary key,
+  "id" uuid primary key,
   "firstName" text not null,
-  "lastName" text not null
+  "lastName" text not null,
+  constraint id_fk foreign key ("id") references auth.users ("id")
+    on update cascade on delete restrict
+);
+
+create type todos_enum as ENUM ('done', 'todo', 'in progress');
+
+create table public.todos (
+  id uuid default gen_random_uuid() primary key,
+  "createdAt" timestamptz default CURRENT_TIMESTAMP not null,
+  "createdById" uuid,
+  "label" text not null,
+  "description" text not null,
+  "status" todos_enum default 'todo' not null,
+  "deadline" timestamptz,
+  constraint "created_by_id_fk" foreign key ("createdById") references public.profiles ("id")
+    on update cascade on delete cascade
 );
 
 CREATE 

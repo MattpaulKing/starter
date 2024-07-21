@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { pushState } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { fly, slide } from 'svelte/transition';
 	import { getModalStore } from './context';
 	import type { Modal } from './store.svelte';
 
@@ -60,7 +61,7 @@
 		{onkeydown}
 		class="absolute z-[9999] w-screen h-screen flex flex-col items-center justify-center bg-surface-backdrop-token"
 	>
-		<div bind:this={modalContainer}>
+		<div in:slide bind:this={modalContainer}>
 			<svelte:component this={activeModal.ref} {...activeModal.props()}></svelte:component>
 		</div>
 	</div>

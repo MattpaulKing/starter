@@ -58,6 +58,7 @@
 			},
 			onUpdate: () => {
 				$value = editor?.getHTML() ?? '';
+				console.log($value);
 			}
 		});
 	});
@@ -75,7 +76,7 @@
 	<span class="">Heading Sizes</span>
 {/snippet}
 
-<input hidden bind:value name={path} />
+<input hidden type="text" bind:value name={path} />
 <div
 	class="input flex h-full max-h-40 w-full flex-col p-0.5 {$errors
 		? 'border-error-500-400-token'

@@ -11,7 +11,10 @@ export default async function({ request, locals: { db } }: RequestEvent) {
   }
   const { error: err } = await db
     .from("posts")
-    .insert(form.data)
+    .insert({
+      ...form.data,
+      id: crypto.randomUUID()
+    })
   if (err) {
     return formDbError(form, err)
   }

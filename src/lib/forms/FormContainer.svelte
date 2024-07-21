@@ -27,8 +27,8 @@
 </script>
 
 <div
-	class="relative flex h-min w-full {restProps.class ?? ''} {bordered
-		? 'card p-4 lg:max-w-xl border-surface-200-700-token border shadow-lg shadow-surface-200 dark:shadow-gray-800'
+	class="relative flex h-min lg:w-[512px] {restProps.class ?? ''} {bordered
+		? 'card p-4 border-surface-200-700-token border shadow-lg shadow-surface-200 dark:shadow-gray-800'
 		: ''}"
 >
 	{#if $delayed}

@@ -1,17 +1,32 @@
 <script lang="ts">
+	import { route } from '$lib/ROUTES';
 	import { List } from '$lib/components';
+	import { getModalStore, openModal } from '$lib/components/Modal';
 	import { fade, slide } from 'svelte/transition';
 	let { data } = $props();
 	let tocExpanded = $state(true);
+	let modalStore = getModalStore();
 </script>
 
 {#snippet label()}
 	<div class="flex justify-between gap-x-8">
 		<span class="text-2xl {tocExpanded ? 'block' : 'hidden'} font-bold">Posts</span>
 		<div class="flex">
-			<button
+			<a
+				href={route('/blog/[action=crud]', { action: 'create' })}
+				onclick={async (e) => {
+					e.preventDefault();
+					await openModal({
+						ref: await import('$routes/blog/[action=crud]/+page.svelte').then((x) => x.default),
+						routes: {
+							from: route('/blog'),
+							to: route('/blog/[action=crud]', { action: 'create' })
+						},
+						modalStore
+					});
+				}}
 				title="Create Post"
-				class="btn btn-sm rounded-r-none variant-ghost font-bold text-lg py-0">+</button
+				class="btn btn-sm rounded-r-none variant-ghost font-bold text-lg py-0">+</a
 			>
 			<button
 				onclick={() => (tocExpanded = !tocExpanded)}
@@ -47,8 +62,11 @@
 	</List>
 	<div class="flex flex-col px-8 py-4 h-fit">
 		<h1 class="h1 font-bold mb-8">Blog Posts</h1>
-		<div class="flex flex-col w-full h-full">
-			<h2 class="h2" id="page1">Some title goes here</h2>
+		<div class="flex flex-col w-full h-full space-y-12">
+			{#each data.posts as post}
+				<h2 class="h2" id="page1">{post.label}</h2>
+				<p class="prose text-token">{post.content}</p>
+			{/each}
 		</div>
 	</div>
 </div>

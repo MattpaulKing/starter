@@ -14,18 +14,85 @@ export type Database = {
           content: string
           createdAt: string
           id: string
+          label: string
         }
         Insert: {
           content: string
           createdAt?: string
           id?: string
+          label: string
         }
         Update: {
           content?: string
           createdAt?: string
           id?: string
+          label?: string
         }
         Relationships: []
+      }
+      profiles: {
+        Row: {
+          firstName: string
+          id: string
+          lastName: string
+        }
+        Insert: {
+          firstName: string
+          id: string
+          lastName: string
+        }
+        Update: {
+          firstName?: string
+          id?: string
+          lastName?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "id_fk"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      todos: {
+        Row: {
+          createdAt: string
+          createdById: string | null
+          deadline: string | null
+          description: string
+          id: string
+          label: string
+          status: Database["public"]["Enums"]["todos_enum"]
+        }
+        Insert: {
+          createdAt?: string
+          createdById?: string | null
+          deadline?: string | null
+          description: string
+          id?: string
+          label: string
+          status?: Database["public"]["Enums"]["todos_enum"]
+        }
+        Update: {
+          createdAt?: string
+          createdById?: string | null
+          deadline?: string | null
+          description?: string
+          id?: string
+          label?: string
+          status?: Database["public"]["Enums"]["todos_enum"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "created_by_id_fk"
+            columns: ["createdById"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_settings: {
         Row: {
@@ -59,7 +126,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      todos_enum: "done" | "todo" | "in progress"
     }
     CompositeTypes: {
       [_ in never]: never
