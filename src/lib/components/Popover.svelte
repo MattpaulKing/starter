@@ -26,6 +26,6 @@
 </script>
 
 <svelte:window {onfocusout} {onkeydown} />
-<div bind:this={containerEl} class="relative p-0! m-0! {classes}">
+<div bind:this={containerEl} class="relative p-0! m-0! overflow-visible {classes}">
 	{@render children()}
 </div>

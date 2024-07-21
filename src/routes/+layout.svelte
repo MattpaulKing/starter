@@ -40,7 +40,7 @@
 <Toast />
 <Modal />
 
-<div class="flex flex-col overflow-y-auto overflow-x-hidden h-screen w-screen">
+<div class="flex scroll-smooth flex-col overflow-y-auto overflow-x-hidden h-screen w-screen">
 	<div class="sticky w-full flex h-fit py-2 px-4 bg-surface-100-800-token place-items-center">
 		{#if slowNav}
 			<div class="relative h-9 w-9">
@@ -53,10 +53,7 @@
 
 		{#if user}
 			<Popover class="h-9" bind:popoverOpen={userMenuOpen}>
-				<button
-					onpointerenter={() => (userMenuOpen = true)}
-					onclick={() => (userMenuOpen = !userMenuOpen)}
-				>
+				<button onclick={() => (userMenuOpen = !userMenuOpen)}>
 					<Avatar
 						initials="MK"
 						class="{userMenuOpen

@@ -2,13 +2,13 @@
 	import type { Snippet } from 'svelte';
 	import { slide, type SlideParams, type TransitionConfig } from 'svelte/transition';
 	let {
-		navList,
+		navList = false,
 		class: classes,
 		label,
 		transition = (node: Element) => slide(node, { duration: 0 }),
 		children
 	}: {
-		navList: boolean;
+		navList?: boolean;
 		class?: string;
 		label?: Snippet;
 		transition?: (node: Element, slideParams?: SlideParams | undefined) => TransitionConfig;
@@ -16,7 +16,7 @@
 	} = $props();
 </script>
 
-<div transition:transition class="w-fit {classes} h-fit flex flex-col gap-y-2 card p-4">
+<div transition:transition class="{classes} flex flex-col gap-y-2 card p-4">
 	{#if label}
 		{@render label()}
 	{/if}

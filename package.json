@@ -50,6 +50,17 @@
     "@floating-ui/dom": "^1.6.7",
     "@supabase/ssr": "^0.4.0",
     "@supabase/supabase-js": "^2.44.3",
+    "@tiptap/core": "^2.5.4",
+    "@tiptap/extension-bold": "^2.5.4",
+    "@tiptap/extension-bullet-list": "^2.5.4",
+    "@tiptap/extension-document": "^2.5.4",
+    "@tiptap/extension-heading": "^2.5.4",
+    "@tiptap/extension-link": "^2.5.4",
+    "@tiptap/extension-list-item": "^2.5.4",
+    "@tiptap/extension-paragraph": "^2.5.4",
+    "@tiptap/extension-text": "^2.5.4",
+    "@tiptap/pm": "^2.5.4",
+    "@tiptap/starter-kit": "^2.5.4",
     "valibot": "^0.36.0"
   }
 }

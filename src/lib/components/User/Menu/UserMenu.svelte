@@ -1,14 +1,12 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { List } from '$lib/components';
-	import { getUser } from '$lib/db/auth/context.svelte';
 	import { fade, slide } from 'svelte/transition';
 	import { modeCurrent, setModeCurrent, setModeUserPrefers } from '@skeletonlabs/skeleton';
 	import { getToaster } from '$lib/components/Toaster';
 	import { route } from '$lib/ROUTES';
 	import type { ActionResult } from '@sveltejs/kit';
 
-	let user = getUser();
 	let toast = getToaster();
 
 	//NOTE: FIXXXXXXX

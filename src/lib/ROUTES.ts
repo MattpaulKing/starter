@@ -12,6 +12,10 @@ const PAGES = {
   "/": `/`,
   "/auth/login": `/auth/login`,
   "/auth/register": `/auth/register`,
+  "/blog": `/blog`,
+  "/blog/[action=crud]": (params: { action: (Parameters<typeof import('../params/crud.ts').match>[0]) }) => {
+    return `/blog/${params.action}`
+  },
   "/slow": `/slow`
 }
 
@@ -28,6 +32,9 @@ const SERVERS = {
 const ACTIONS = {
   "signin /auth/login": `/auth/login?/signin`,
   "register /auth/register": `/auth/register?/register`,
+  "default /blog/[action=crud]": (params: { action: (Parameters<typeof import('../params/crud.ts').match>[0]) }) => {
+    return `/blog/${params.action}`
+  },
   "lightmode /user/settings": `/user/settings?/lightmode`
 }
 
@@ -138,9 +145,9 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 * ```
 */
 export type KIT_ROUTES = {
-  PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/slow': never }
+  PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/blog': never, '/blog/[action=crud]': 'action', '/slow': never }
   SERVERS: { 'GET /auth/callback': never }
-  ACTIONS: { 'signin /auth/login': never, 'register /auth/register': never, 'lightmode /user/settings': never }
+  ACTIONS: { 'signin /auth/login': never, 'register /auth/register': never, 'default /blog/[action=crud]': 'action', 'lightmode /user/settings': never }
   LINKS: Record<string, never>
-  Params: Record<string, never>
+  Params: { action: never }
 }

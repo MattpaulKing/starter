@@ -6,7 +6,7 @@
 </script>
 
 <label for={path}>
-	<div class="mb-1 flex h-8 w-full place-items-center justify-between gap-x-2">
+	<div class="mb-1 ml-1 flex h-8 w-full place-items-center justify-between gap-x-2">
 		<span class={$constraints?.required ? 'field-required-label relative' : ''}>
 			{label}
 		</span>
