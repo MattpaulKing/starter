@@ -1,6 +1,6 @@
 <script lang="ts" generics="T extends Record<string, unknown>">
-	import { setFormCtx } from '../inputs/context';
 	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
+	import { setFormCtx } from './inputs/context';
 	import type { SuperForm } from 'sveltekit-superforms';
 
 	let {

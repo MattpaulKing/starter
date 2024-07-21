@@ -2,9 +2,8 @@
 	import { setFormStores } from '$lib/forms/setForm.js';
 	import { registerSchema } from '../lib/schemas/registerSchema.js';
 	import { route } from '$lib/ROUTES.js';
-	import FormContainer from '$lib/forms/components/FormContainer.svelte';
-	import FormTitle from '$lib/forms/components/FormTitle.svelte';
 	import { Errors, Field, Input, Label } from '$lib/forms/inputs/index.js';
+	import { FormContainer, FormTitle } from '$lib/forms/index.js';
 
 	let { data } = $props();
 	let form = setFormStores({
@@ -19,7 +18,7 @@
 
 <div class="flex flex-col w-full h-full items-center justify-center">
 	<FormContainer {form} action={route('register /auth/register')}>
-		<FormTitle label="Register" />
+		<FormTitle>Register</FormTitle>
 		<Field {form} path="firstName">
 			<Label label="First Name" />
 			<Input type="text" />

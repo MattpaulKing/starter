@@ -15,7 +15,13 @@ export const actions = {
       .auth
       .signUp({
         email: form.data.email,
-        password: form.data.password
+        password: form.data.password,
+        options: {
+          data: {
+            firstName: form.data.firstName,
+            lastName: form.data.lastName
+          }
+        }
       })
     if (err) {
       return formDbError(form, err)

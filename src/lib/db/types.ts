@@ -27,6 +27,30 @@ export type Database = {
         }
         Relationships: []
       }
+      user_settings: {
+        Row: {
+          lightmode: boolean
+          pushNotifications: boolean
+          reducedMotion: boolean
+          tableRows: number
+          userId: string
+        }
+        Insert: {
+          lightmode?: boolean
+          pushNotifications?: boolean
+          reducedMotion?: boolean
+          tableRows?: number
+          userId: string
+        }
+        Update: {
+          lightmode?: boolean
+          pushNotifications?: boolean
+          reducedMotion?: boolean
+          tableRows?: number
+          userId?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

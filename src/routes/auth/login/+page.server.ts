@@ -3,13 +3,17 @@ import { superValidate } from "sveltekit-superforms"
 import { valibot } from "sveltekit-superforms/adapters"
 import { loginSchema } from "../lib/schemas/loginSchema"
 import type { PageServerLoad } from "./$types"
+import { formDbError } from "$lib/forms/formMessages"
 
 export const actions = {
   signin: async ({ request, locals: { db } }) => {
-    const form = Object.fromEntries(await request.formData()) as { next: string, email: string, password: string }
+    const form = await superValidate(request, valibot(loginSchema))
+    if (!form.valid) {
+      return formDbError(form, { message: "Invalid credentials" })
+    }
     const { data, error: err } = await db.auth.signInWithPassword({
-      email: form.email,
-      password: form.password
+      email: form.data.email,
+      password: form.data.password
     })
     if (err || !data.user) {
       error(404, "That user wasn't found")

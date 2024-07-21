@@ -8,7 +8,7 @@
 
 <div
 	bind:contentRect={containerRect}
-	class="absolute flex flex-col h-fit top-8 gap-y-2 right-8 w-80 max-w-80"
+	class="absolute flex flex-col h-fit z-[9999] top-4 gap-y-2 right-8 w-80 max-w-80"
 >
 	{#each toaster.queue as toast (toast.id)}
 		<div
@@ -29,7 +29,7 @@
 				}}
 				class="absolute -top-1 -right-1 btn btn-sm font-bold text-lg">x</button
 			>
-			<span class="">{toast.id} {toast.message}</span>
+			<span class="">{toast.message}</span>
 		</div>
 	{/each}
 </div>

@@ -2,12 +2,24 @@
 	import '../app.css';
 	import { Modal, setModalStore } from '$lib/components/Modal';
 	import { Toast, setToaster } from '$lib/components/Toaster';
-	import { Breadcrumb, List, Avatar, Popover, LoadingSpinner } from '$lib/components';
-	import { slide } from 'svelte/transition';
+	import { Breadcrumb, Avatar, Popover, LoadingSpinner } from '$lib/components';
 	import { beforeNavigate } from '$app/navigation';
+	import { setUser } from '$lib/db/auth/context.svelte';
+	import { UserMenu } from '$lib/components/User/Menu';
+	import { setUserSettings } from './user/settings/lib/context.svelte';
+	import type { User } from '@supabase/supabase-js';
+
+	let { data, children } = $props();
 
 	setToaster();
 	setModalStore();
+
+	let user = $state<User | null>(null);
+	if (data.user) {
+		user = setUser(data.user);
+	}
+
+	let userSettings = setUserSettings(data.userSettings);
 
 	let userMenuOpen = $state(false);
 	let slowNav = $state(false);
@@ -23,7 +35,6 @@
 			}
 		});
 	});
-	let { children } = $props();
 </script>
 
 <Toast />
@@ -31,14 +42,16 @@
 
 <div class="flex flex-col overflow-y-auto overflow-x-hidden h-screen w-screen">
 	<div class="sticky w-full flex h-fit py-2 px-4 bg-surface-100-800-token place-items-center">
-		<div class="flex w-full gap-x-8">
-			<Breadcrumb />
-		</div>
 		{#if slowNav}
 			<div class="relative h-9 w-9">
 				<LoadingSpinner class="h-9 w-9" />
 			</div>
-		{:else}
+		{/if}
+		<div class="flex w-full gap-x-8">
+			<Breadcrumb />
+		</div>
+
+		{#if user}
 			<Popover class="h-9" bind:popoverOpen={userMenuOpen}>
 				<button
 					onpointerenter={() => (userMenuOpen = true)}
@@ -52,11 +65,7 @@
 					/>
 				</button>
 				{#if userMenuOpen}
-					<List transition={slide} class="absolute right-0 top-full" label="Hello World">
-						<button class="btn btn-sm variant-ghost">1</button>
-						<button class="btn btn-sm variant-ghost">2</button>
-						<button class="btn btn-sm variant-ghost">3</button>
-					</List>
+					<UserMenu />
 				{/if}
 			</Popover>
 		{/if}

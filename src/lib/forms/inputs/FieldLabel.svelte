@@ -1,16 +1,17 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import { getField } from './context';
-	let { label }: { label: string | undefined } = $props();
+	let { label, children }: { label: string | undefined; children?: Snippet } = $props();
 	let { path, constraints } = getField();
 </script>
 
 <label for={path}>
 	<div class="mb-1 flex h-8 w-full place-items-center justify-between gap-x-2">
 		<span class={$constraints?.required ? 'field-required-label relative' : ''}>
-			<slot name="label">
-				{label}
-			</slot>
+			{label}
 		</span>
-		<slot name="action" />
+		{#if children}
+			{@render children()}
+		{/if}
 	</div>
 </label>
