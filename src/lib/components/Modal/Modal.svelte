@@ -46,11 +46,16 @@
 			closeModal();
 		}
 	}
+	function handleEsc(e: KeyboardEvent) {
+		if (e.key === 'Escape') {
+			closeModal();
+		}
+	}
 	let backdropEl = $state<HTMLElement | undefined>();
 	let modalContainer = $state<HTMLElement | undefined>();
 </script>
 
-<svelte:window onpopstate={restoreModalOnForward} />
+<svelte:window onkeydown={handleEsc} onpopstate={restoreModalOnForward} />
 {#if activeModal}
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<div
