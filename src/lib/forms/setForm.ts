@@ -1,11 +1,12 @@
-import { valibotClient } from "sveltekit-superforms/adapters"
-import { superForm, type FormOptions, type Infer, type SuperForm, type SuperValidated } from "sveltekit-superforms"
-import type { GenericSchema } from "valibot"
+import { zod } from "sveltekit-superforms/adapters"
+import { superForm, type FormOptions, type Infer, type SuperValidated } from "sveltekit-superforms"
 import type { Toaster } from "$lib/components/Toaster/Toaster.svelte"
+import type { AnyZodObject, ZodEffects } from "zod"
 
-export function defaultFormOptions<T extends GenericSchema>(schema: T) {
+
+export function defaultFormOptions<T extends AnyZodObject | ZodEffects<AnyZodObject>>(validator: T) {
   return {
-    validators: valibotClient(schema),
+    validators: zod(validator),
     errorSelector: '[aria-invalid="true"],[data-invalid]',
     scrollToError: "smooth" as const,
     stickyNavbar: ".app-bar" as const,
@@ -15,11 +16,7 @@ export function defaultFormOptions<T extends GenericSchema>(schema: T) {
   } as FormOptions<Infer<T>, any, Infer<T>>
 }
 
-// <T extends Record<string, unknown> = Record<string, unknown>
-// M = App.Superforms.Message extends never ? any : App.Superforms.Message
-// In extends Record<string, unknown>
-
-export function setFormStores<T extends GenericSchema>({ form, schema, stores, opts = {} }:
+export function setFormStores<T extends AnyZodObject | ZodEffects<AnyZodObject>>({ form, schema, stores, opts = {} }:
   { form: SuperValidated<Infer<T>, any, Infer<T>>, schema: T, stores: { toast: Toaster }, opts: FormOptions<Infer<T>, any, Infer<T>> }
 ) {
   return superForm(form, {

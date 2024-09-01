@@ -53,6 +53,9 @@ dependencies:
   valibot:
     specifier: ^0.36.0
     version: 0.36.0
+  zod:
+    specifier: ^3.23.8
+    version: 3.23.8
 
 devDependencies:
   '@playwright/test':
@@ -4832,5 +4835,3 @@ packages:
   /zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
     requiresBuild: true
-    dev: true
-    optional: true

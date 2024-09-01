@@ -64,6 +64,7 @@
     "@tiptap/pm": "^2.6.6",
     "@tiptap/starter-kit": "^2.6.6",
     "sanitize-html": "^2.13.0",
-    "valibot": "^0.36.0"
+    "valibot": "^0.36.0",
+    "zod": "^3.23.8"
   }
 }
