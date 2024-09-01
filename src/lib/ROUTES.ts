@@ -21,7 +21,9 @@ const PAGES = {
   },
   "/restaurant": `/restaurant`,
   "/restaurant/about": `/restaurant/about`,
-  "/restaurant/menu": `/restaurant/menu`,
+  "/restaurant/menu/[menuSection]": (params: { menuSection: (string | number) }) => {
+    return `/restaurant/menu/${params.menuSection}`
+  },
   "/slow": `/slow`,
   "/todos": `/todos`,
   "/todos/[action=crud]": (params: { action: (Parameters<typeof import('../params/crud.ts').match>[0]) }) => {
@@ -155,9 +157,9 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 * ```
 */
 export type KIT_ROUTES = {
-  PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/blog': never, '/blog/[action=crud]': 'action', '/blog/[id=uuid]': 'id', '/restaurant': never, '/restaurant/about': never, '/restaurant/menu': never, '/slow': never, '/todos': never, '/todos/[action=crud]': 'action' }
+  PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/blog': never, '/blog/[action=crud]': 'action', '/blog/[id=uuid]': 'id', '/restaurant': never, '/restaurant/about': never, '/restaurant/menu/[menuSection]': 'menuSection', '/slow': never, '/todos': never, '/todos/[action=crud]': 'action' }
   SERVERS: { 'GET /auth/callback': never }
   ACTIONS: { 'signin /auth/login': never, 'register /auth/register': never, 'default /blog/[action=crud]': 'action', 'default /todos/[action=crud]': 'action', 'lightmode /user/settings': never }
   LINKS: Record<string, never>
-  Params: { action: never, id: never }
+  Params: { action: never, id: never, menuSection: never }
 }
