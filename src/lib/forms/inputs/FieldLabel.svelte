@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
 	import { getField } from './context';
+	import type { Snippet } from 'svelte';
 	let { label, children }: { label: string | undefined; children?: Snippet } = $props();
 	let { path, constraints } = getField();
 </script>

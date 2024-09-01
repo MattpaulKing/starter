@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { sanitizerSettings } from '$routes/blog/lib/sanitizerSettings';
 	import { onMount } from 'svelte';
+	import sanitizeHtml from 'sanitize-html';
 	import { getField } from '../context';
 	import { Editor } from '@tiptap/core';
 	import Text from '@tiptap/extension-text';
@@ -50,15 +52,14 @@
 				ListItem.configure({ HTMLAttributes: { class: '' } })
 			],
 			content: $value,
-			onTransaction: (e) => {
+			onTransaction: () => {
 				editor = editor;
 				boldActive = editor?.isActive('bold');
 				headingActive = editor?.isActive('heading');
 				bulletListActive = editor?.isActive('bulletList');
 			},
 			onUpdate: () => {
-				$value = editor?.getHTML() ?? '';
-				console.log($value);
+				$value = sanitizeHtml(editor?.getHTML() ?? '', sanitizerSettings);
 			}
 		});
 	});

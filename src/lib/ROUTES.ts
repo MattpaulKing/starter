@@ -16,6 +16,12 @@ const PAGES = {
   "/blog/[action=crud]": (params: { action: (Parameters<typeof import('../params/crud.ts').match>[0]) }) => {
     return `/blog/${params.action}`
   },
+  "/blog/[id=uuid]": (params: { id: (Parameters<typeof import('../params/uuid.ts').match>[0]) }) => {
+    return `/blog/${params.id}`
+  },
+  "/restaurant": `/restaurant`,
+  "/restaurant/about": `/restaurant/about`,
+  "/restaurant/menu": `/restaurant/menu`,
   "/slow": `/slow`,
   "/todos": `/todos`,
   "/todos/[action=crud]": (params: { action: (Parameters<typeof import('../params/crud.ts').match>[0]) }) => {
@@ -101,14 +107,6 @@ export const currentSp = () => {
   return record
 }
 
-function StringOrUndefined(val: any) {
-  if (val === undefined) {
-    return undefined
-  }
-
-  return String(val)
-}
-
 // route function helpers
 type NonFunctionKeys<T> = { [K in keyof T]: T[K] extends Function ? never : K }[keyof T]
 type FunctionKeys<T> = { [K in keyof T]: T[K] extends Function ? K : never }[keyof T]
@@ -116,6 +114,11 @@ type FunctionParams<T> = T extends (...args: infer P) => any ? P : never
 
 const AllObjs = { ...PAGES, ...ACTIONS, ...SERVERS, ...LINKS }
 type AllTypes = typeof AllObjs
+
+export type Routes = keyof AllTypes extends `${string}/${infer Route}` ? `/${Route}` : keyof AllTypes
+export const routes = [
+	...new Set(Object.keys(AllObjs).map((route) => /^\/.*|[^ ]?\/.*$/.exec(route)?.[0] ?? route)),
+] as Routes[]
 
 /**
  * To be used like this: 
@@ -152,9 +155,9 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 * ```
 */
 export type KIT_ROUTES = {
-  PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/blog': never, '/blog/[action=crud]': 'action', '/slow': never, '/todos': never, '/todos/[action=crud]': 'action' }
+  PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/blog': never, '/blog/[action=crud]': 'action', '/blog/[id=uuid]': 'id', '/restaurant': never, '/restaurant/about': never, '/restaurant/menu': never, '/slow': never, '/todos': never, '/todos/[action=crud]': 'action' }
   SERVERS: { 'GET /auth/callback': never }
   ACTIONS: { 'signin /auth/login': never, 'register /auth/register': never, 'default /blog/[action=crud]': 'action', 'default /todos/[action=crud]': 'action', 'lightmode /user/settings': never }
   LINKS: Record<string, never>
-  Params: { action: never }
+  Params: { action: never, id: never }
 }

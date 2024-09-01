@@ -30,8 +30,12 @@
 </script>
 
 <div class="flex flex-col h-full items-center justify-center w-full">
-	<FormContainer {form} action={route('default /blog/[action=crud]', { action: data.action })}>
-		<FormTitle>Post</FormTitle>
+	<FormContainer
+		class="lg:w-[512px] xl:w-[1024px]"
+		{form}
+		action={route('default /blog/[action=crud]', { action: data.action })}
+	>
+		<FormTitle><span class="capitalize">{data.action}</span> Post</FormTitle>
 		<Field class="col-span-2" {form} path="label">
 			<Label label="Title" />
 			<Input type="text" />

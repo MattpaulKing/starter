@@ -1,6 +1,6 @@
 <script lang="ts" generics="T extends Record<string, unknown>">
-	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
 	import { setFormCtx } from './inputs/context';
+	import LoadingSpinner from '$lib/components/LoadingSpinner.svelte';
 	import type { SuperForm } from 'sveltekit-superforms';
 
 	let {
@@ -27,7 +27,7 @@
 </script>
 
 <div
-	class="relative flex h-min lg:w-[512px] {restProps.class ?? ''} {bordered
+	class="relative flex h-min w-full {restProps.class ?? ''} {bordered
 		? 'card p-4 border-surface-200-700-token border shadow-lg shadow-surface-200 dark:shadow-gray-800'
 		: ''}"
 >
