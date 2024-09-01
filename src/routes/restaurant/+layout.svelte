@@ -12,7 +12,6 @@
 	let pages = [
 		{ label: 'About', href: 'about' },
 		{ label: 'Menu', href: 'menu/main' },
-		{ label: 'Press', href: 'press' },
 		{ label: 'Reservations', href: 'reservations' }
 	];
 	let mobileMenuOpen = $state(false);

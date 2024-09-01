@@ -3,9 +3,12 @@
 </script>
 
 <div class="grid grid-rows-[auto_auto_auto] gap-y-16">
-	<div class="w-full h-96 min-h-max bg-[url('/dish.jpg')] bg-cover bg-no-repeat bg-center"></div>
-	<div class="flex flex-col items-center space-y-8 px-2">
-		<h2 class="h2 text-black">About The Bull</h2>
+	<div
+		class="w-full flex flex-col items-center justify-center h-96 min-h-max bg-[url('/dish.jpg')] bg-cover bg-no-repeat bg-center"
+	>
+		<h1 class="h1 font-bold text-white capitalize">About The Bull</h1>
+	</div>
+	<div class="flex flex-col items-center space-y-8 mx-2">
 		<span class="prose text-center">
 			From the team behind Vancouver’s award-winning restaurants The Bear, Undun, Branca, as well as
 			New York City’s The Flea, Fantasy Group welcomes you to its first restaurant in the heart of
@@ -34,7 +37,7 @@
 	<div class="flex flex-col items-center w-full mt-8">
 		<div class="flex flex-col md:flex-row gap-x-8">
 			<enhanced:img src="/static/chef.jpg" class="max-w-96" alt="Executive Chef Carmy" />
-			<div class="flex flex-col space-y-4 mt-8">
+			<div class="flex flex-col space-y-4 mx-2 mt-8">
 				<span class="font-heading-token tracking-widest uppercase font-bold"
 					>Carmy, Executive Chef</span
 				>

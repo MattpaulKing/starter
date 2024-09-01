@@ -16,6 +16,7 @@
 	autocomplete="off"
 	class="input [&::-webkit-calendar-picker-indicator]:scale-150 [&::-webkit-calendar-picker-indicator]:bg-[url('/Calendar.png')] [&::-webkit-calendar-picker-indicator]:dark:invert"
 	name={path}
+	step="30"
 	disabled={$disabled}
 	bind:value={$strValue}
 	on:reset
