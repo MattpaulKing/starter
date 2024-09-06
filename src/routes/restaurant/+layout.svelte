@@ -2,6 +2,8 @@
 	import { browser } from '$app/environment';
 	import { setModeCurrent } from '@skeletonlabs/skeleton';
 	import { MobileMenu } from './lib/components';
+	import { onNavigate } from '$app/navigation';
+	import { fade } from 'svelte/transition';
 
 	let { children } = $props();
 	if (browser) {
@@ -15,6 +17,10 @@
 		{ label: 'Reservations', href: 'reservations' }
 	];
 	let mobileMenuOpen = $state(false);
+	let navigating = $state(false);
+	onNavigate(() => {
+		navigating = !navigating;
+	});
 </script>
 
 {#snippet navAnchor({ label, href }: { label: string; href: string })}
@@ -43,7 +49,9 @@
 			{/each}
 		</MobileMenu>
 	</header>
-	<main class="">
-		{@render children()}
-	</main>
+	{#key navigating}
+		<main out:fade class="">
+			{@render children()}
+		</main>
+	{/key}
 </div>
