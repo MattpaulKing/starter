@@ -19,6 +19,7 @@ body {
 
 :root {
   --theme-font-family-heading: 'Poppins' !important;
+  scrollbar-width: none;
 }
 
 .input {

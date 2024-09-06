@@ -13,11 +13,12 @@ export function defaultFormOptions<T extends AnyZodObject | ZodEffects<AnyZodObj
     delayMs: 700,
     timeoutMs: 8000,
     resetForm: false,
+    invalidateAll: false
   } as FormOptions<Infer<T>, any, Infer<T>>
 }
 
 export function setFormStores<T extends AnyZodObject | ZodEffects<AnyZodObject>>({ form, schema, stores, opts = {} }:
-  { form: SuperValidated<Infer<T>, any, Infer<T>>, schema: T, stores: { toast: Toaster }, opts: FormOptions<Infer<T>, any, Infer<T>> }
+  { form: SuperValidated<Infer<T>, any, Infer<T>>, schema: T, stores: { toast: Toaster }, opts?: FormOptions<Infer<T>, any, Infer<T>> }
 ) {
   return superForm(form, {
     ...defaultFormOptions(schema),

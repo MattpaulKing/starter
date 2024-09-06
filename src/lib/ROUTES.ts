@@ -49,6 +49,7 @@ const ACTIONS = {
   "default /blog/[action=crud]": (params: { action: (Parameters<typeof import('../params/crud.ts').match>[0]) }) => {
     return `/blog/${params.action}`
   },
+  "newsletterSignUp /rec-charity": `/rec-charity?/newsletterSignUp`,
   "default /todos/[action=crud]": (params: { action: (Parameters<typeof import('../params/crud.ts').match>[0]) }) => {
     return `/todos/${params.action}`
   },
@@ -161,7 +162,7 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 export type KIT_ROUTES = {
   PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/blog': never, '/blog/[action=crud]': 'action', '/blog/[id=uuid]': 'id', '/rec-charity': never, '/restaurant': never, '/restaurant/about': never, '/restaurant/menu/[menuSection]': 'menuSection', '/restaurant/reservations': never, '/slow': never, '/todos': never, '/todos/[action=crud]': 'action' }
   SERVERS: { 'GET /auth/callback': never }
-  ACTIONS: { 'signin /auth/login': never, 'register /auth/register': never, 'default /blog/[action=crud]': 'action', 'default /todos/[action=crud]': 'action', 'lightmode /user/settings': never }
+  ACTIONS: { 'signin /auth/login': never, 'register /auth/register': never, 'default /blog/[action=crud]': 'action', 'newsletterSignUp /rec-charity': never, 'default /todos/[action=crud]': 'action', 'lightmode /user/settings': never }
   LINKS: Record<string, never>
   Params: { action: never, id: never, menuSection: never }
 }

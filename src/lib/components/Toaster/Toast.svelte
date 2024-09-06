@@ -8,7 +8,7 @@
 
 <div
 	bind:contentRect={containerRect}
-	class="absolute flex flex-col h-fit z-[9999] top-4 gap-y-2 right-8 w-80 max-w-80"
+	class="flex z-[9999] fixed flex-col h-fit top-4 gap-y-2 right-8 w-80 max-w-80"
 >
 	{#each toaster.queue as toast (toast.id)}
 		<div
