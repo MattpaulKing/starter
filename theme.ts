@@ -87,16 +87,16 @@ export const pincheApp: CustomThemeConfig = {
     "--color-error-800": "153 0 0", // #990000
     "--color-error-900": "125 0 0", // #7d0000
     // surface | #475990 
-    "--color-surface-50": "228 230 238", // #e4e6ee
-    "--color-surface-100": "219 222 233", // #dbdee9
-    "--color-surface-200": "210 214 227", // #d2d6e3
-    "--color-surface-300": "182 189 210", // #b6bdd2
-    "--color-surface-400": "128 140 177", // #808cb1
-    "--color-surface-500": "73 90 143", // #495a8f
-    "--color-surface-600": "66 81 129", // #425181
-    "--color-surface-700": "55 68 107", // #37446b
-    "--color-surface-800": "44 54 86", // #2c3656
-    "--color-surface-900": "36 44 70", // #242c46
+    "--color-surface-50": "235 234 233", // #ebeae9
+    "--color-surface-100": "228 227 226", // #e4e3e2
+    "--color-surface-200": "221 220 218", // #dddcda
+    "--color-surface-300": "201 198 196", // #c9c6c4
+    "--color-surface-400": "161 156 152", // #a19c98
+    "--color-surface-500": "120 113 108", // #78716C
+    "--color-surface-600": "108 102 97", // #6c6661
+    "--color-surface-700": "90 85 81", // #5a5551
+    "--color-surface-800": "72 68 65", // #484441
+    "--color-surface-900": "59 55 53", // #3b3735  
   }
 }
 

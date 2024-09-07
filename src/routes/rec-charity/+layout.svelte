@@ -12,7 +12,7 @@
 	let pages = [
 		{ label: 'About Us', href: 'about' },
 		{ label: 'Our Team', href: 'team' },
-		{ label: 'Programs', href: 'programs', headings: ['seniors', 'women', 'youth'] }
+		{ label: 'Courses', href: 'courses', headings: ['seniors', 'women', 'youth'] }
 	];
 	let mobileMenuOpen = $state(false);
 </script>
@@ -26,9 +26,9 @@
 	label: string;
 	headings?: string[];
 })}
-	<nav class="relative group flex flex-col p-2">
+	<nav class="relative group flex flex-col">
 		<a
-			class="text-gray-50 font-heading-token group-hover:text-gray-300 text-lg"
+			class="text-gray-50 font-heading-token group-hover:variant-ghost btn btn-sm group-hover:text-gray-300 text-lg"
 			href="/rec-charity/{href}"
 			>{label}
 			{#if headings}
@@ -37,7 +37,7 @@
 		</a>
 		{#if headings}
 			<ul
-				class="hidden list-nav rounded-lg top-full bg-surface-100-800-token w-full group-hover:flex flex-col absolute"
+				class="hidden list-nav rounded-lg top-full bg-stone-900 w-full group-hover:flex flex-col absolute"
 			>
 				{#each headings as heading}
 					<a
@@ -52,18 +52,18 @@
 
 <div class="grid grid-rows-[auto_1fr] h-full">
 	<header
-		class="sticky top-0 z-10 max-w-full flex place-items-center px-10 justify-between bg-surface-100-800-token"
+		class="sticky top-0 z-20 max-w-full flex place-items-center px-10 justify-between bg-stone-800"
 	>
 		<a
 			href="/rec-charity"
 			class="font-heading-token text-white hover:text-gray-300 font-bold tracking-wide text-3xl"
 			>Spresso</a
 		>
-		<div class="hidden md:flex gap-x-6 h-14 place-items-center justify-end">
+		<div class="hidden md:flex gap-x-4 h-14 place-items-center justify-end">
 			{#each pages as page}
 				{@render navAnchor(page)}
 			{/each}
-			<button class="btn btn-sm variant-filled-warning">Donate</button>
+			<button class="btn btn-sm variant-filled-secondary">Donate</button>
 		</div>
 		<MobileMenu {mobileMenuOpen}>
 			{#each pages as page}
@@ -71,7 +71,7 @@
 			{/each}
 		</MobileMenu>
 	</header>
-	<main class="">
+	<main class="bg-stone-900">
 		{@render children()}
 	</main>
 </div>

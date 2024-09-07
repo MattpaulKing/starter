@@ -36,24 +36,21 @@
 	});
 </script>
 
-<div class="flex flex-col items-center lg:gap-y-48 gap-y-16 w-full">
+<div class="flex flex-col pb-24 items-center relative z-10 lg:gap-y-48 gap-y-16 w-full">
 	<section
-		class="flex flex-col relative bg-gray-900 bg-opacity-85 justify-center h-screen overflow-hidden w-full"
+		class="flex flex-col relative bg-stone-900 bg-opacity-85 justify-center h-screen overflow-hidden w-full"
 	>
-		<div class="flex flex-col px-2">
-			<div class="container max-w-2xl lg:ml-48 text-white mt-28">
-				<h1 class="h1 text-3xl lg:text-7xl whitespace-nowrap font-bold">
-					Empowering the Next <br /> Generation of Coders
-				</h1>
-				<span class="text-xl mt-2"
-					>Our charity organization is dedicated to providing free programming courses to
-					underserved communities, helping them unlock their full potential and build a brighter
-					future.</span
-				>
-				<div class="flex gap-x-2 place-items-center mt-6 w-fit">
-					<button class="btn variant-filled-warning">Donate</button>
-					<button class="btn variant-filled">Programs</button>
-				</div>
+		<div class="flex flex-col px-2 container max-w-2xl lg:ml-48 text-white">
+			<h1 class="h1 text-3xl lg:text-7xl whitespace-nowrap font-bold">
+				Empowering the Next <br /> Generation of Coders
+			</h1>
+			<span class="text-xl mt-6"
+				>Our charity organization is dedicated to providing free programming courses to underserved
+				communities, helping them unlock their full potential and build a brighter future.</span
+			>
+			<div class="flex gap-x-2 place-items-center mt-8 w-fit">
+				<button class="btn variant-filled-secondary">Donate</button>
+				<button class="btn variant-ghost-surface">Programs</button>
 			</div>
 		</div>
 		{#key videoIdx}
@@ -74,7 +71,7 @@
 		<div class="flex flex-col lg:ml-48 space-y-6 lg:space-y-8">
 			<div class="flex flex-col">
 				<h2 class="h2 text-3xl tracking-tight lg:text-7xl text-balance font-bold">
-					Our Programming Courses
+					Programming Courses
 				</h2>
 				<span class="text-lg mt-6 text-pretty lg:max-w-2xl">
 					We offer a range of programming courses tailored to students of all skill levels, from
@@ -93,7 +90,7 @@
 	<section class="flex flex-col px-2 w-full">
 		<div class="flex flex-col lg:ml-48 space-y-6 lg:space-y-8">
 			<div class="flex flex-col">
-				<h2 class="h2 text-3xl lg:text-7xl font-bold">The Team</h2>
+				<h2 class="h2 text-3xl lg:text-7xl font-bold">Team</h2>
 				<span class="text-lg max-w-2xl mt-6">
 					Our dedicated team of instructors and volunteers are passionate about empowering the next
 					generation of coders. Get to know the key members of our organization.</span
@@ -142,7 +139,7 @@
 			<form
 				method="POST"
 				action={route('newsletterSignUp /rec-charity')}
-				class="flex flex-col card p-4 w-fit h-min"
+				class="flex flex-col bg-stone-800 border border-stone-700 shadow shadow-stone-700 rounded-lg p-4 w-fit h-min"
 				use:form.enhance
 			>
 				<div class="flex gap-x-4">
@@ -181,11 +178,11 @@
 	hours: string;
 })}
 	<div
-		class="flex h-96 flex-col card p-4 max-w-96 justify-between border-surface-300-600-token rounded-lg border"
+		class="flex h-96 flex-col bg-stone-800 p-4 max-w-96 justify-between rounded-lg border border-stone-700 shadow-stone-700 shadow"
 	>
 		<span class="text-xl font-bold">{title}</span>
 		<span class="mt-2">{description}</span>
-		<div class="grid grid-cols-[auto_1fr] gap-x-2 mt-6">
+		<div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-2 mt-6 items-center">
 			<img src="/Calendar.png" class="dark:invert" alt="cal" />
 			<span>{length}</span>
 			<img src="/UsersThree.png" class="dark:invert" alt="users" />
@@ -193,7 +190,9 @@
 			<img src="/ClockCounterClockwise.png" class="dark:invert" alt="clock" />
 			<span>{hours}</span>
 		</div>
-		<a href="/rec-charity/programs/{id}" class="btn mt-6 self-start variant-filled">Learn More</a>
+		<a href="/rec-charity/programs/{id}" class="btn mt-6 self-start variant-filled-secondary"
+			>Learn More</a
+		>
 	</div>
 {/snippet}
 {#snippet instructorBio({
@@ -206,7 +205,7 @@
 	description: string;
 })}
 	<div
-		class="flex flex-col card h-64 p-4 max-w-96 gap-y-3 border-surface-300-600-token rounded-lg border"
+		class="flex flex-col bg-stone-800 h-64 p-4 max-w-96 gap-y-3 border-stone-700 shadow shadow-stone-700 rounded-lg border"
 	>
 		<div class="flex flex-col">
 			<span class="text-xl font-bold">{name}</span>
