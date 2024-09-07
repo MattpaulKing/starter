@@ -36,7 +36,7 @@
 	});
 </script>
 
-<div class="flex flex-col items-center w-full">
+<div class="flex flex-col items-center lg:gap-y-48 gap-y-16 w-full">
 	<section
 		class="flex flex-col relative bg-gray-900 bg-opacity-85 justify-center h-screen overflow-hidden w-full"
 	>
@@ -70,13 +70,13 @@
 		{/key}
 	</section>
 
-	<section class="flex flex-col my-12 lg:my-24 px-2 w-full">
-		<div class="flex flex-col mb-12 lg:ml-48 space-y-4 lg:space-y-8">
+	<section class="flex flex-col px-2 w-full">
+		<div class="flex flex-col lg:ml-48 space-y-6 lg:space-y-8">
 			<div class="flex flex-col">
 				<h2 class="h2 text-3xl tracking-tight lg:text-7xl text-balance font-bold">
 					Our Programming Courses
 				</h2>
-				<span class="text-lg ml-2 mt-6 text-pretty lg:max-w-2xl">
+				<span class="text-lg mt-6 text-pretty lg:max-w-2xl">
 					We offer a range of programming courses tailored to students of all skill levels, from
 					beginner to advanced. Our curriculum is designed to provide a solid foundation in coding
 					principles and practical, real-world applications.</span
@@ -90,11 +90,11 @@
 		</div>
 	</section>
 
-	<section class="flex flex-col my-12 lg:my-24 px-2 w-full">
-		<div class="flex flex-col mb-12 lg:ml-48 space-y-4 lg:space-y-8">
+	<section class="flex flex-col px-2 w-full">
+		<div class="flex flex-col lg:ml-48 space-y-6 lg:space-y-8">
 			<div class="flex flex-col">
 				<h2 class="h2 text-3xl lg:text-7xl font-bold">The Team</h2>
-				<span class="text-lg max-w-2xl ml-4 mt-6">
+				<span class="text-lg max-w-2xl mt-6">
 					Our dedicated team of instructors and volunteers are passionate about empowering the next
 					generation of coders. Get to know the key members of our organization.</span
 				>
@@ -109,31 +109,60 @@
 		</div>
 	</section>
 
-	<div class="flex mx-auto justify-center h-fit w-full bg-surface-50-900-token">
-		<form
-			method="POST"
-			action={route('newsletterSignUp /rec-charity')}
-			class="flex w-fit flex-col my-24"
-			use:form.enhance
-		>
-			<h2 class="h2 underline mb-8 underline-offset-8">Newsletter</h2>
-			<div class="flex gap-x-4 mb-6">
-				<Field class="col-start-1 max-w-48 justify-self-end" {form} path="firstName">
-					<Label label="First Name" />
-					<Input type="text" />
-				</Field>
-				<Field class="col-start-2 max-w-48 justify-self-center" {form} path="lastName">
-					<Label label="Last Name" />
-					<Input type="text" />
-				</Field>
-				<Field class="col-start-3 max-w-48 justify-self-start" {form} path="email">
+	<section class="flex flex-col px-2 w-full">
+		<div class="grid lg:grid-cols-[auto_1fr] lg:ml-48 space-y-6 lg:space-y-24 space-x-24">
+			<div class="flex flex-col max-w-xl">
+				<h2 class="h2 text-3xl lg:text-7xl font-bold">Newsletter</h2>
+				<span class="text-lg max-w-2xl mt-6">
+					Are you passionate about technology and eager to make a difference? Our newsletter is your
+					gateway to staying informed, inspired, and involved!
+				</span>
+				<ul class="list mt-4 space-y-2">
+					<li class="">
+						Exclusive Updates: Be the first to hear about our new programming courses, workshops,
+						and events. Get insider access to the latest trends and technologies shaping the future
+						of tech.
+					</li>
+					<li>
+						Success Stories: Discover how individuals like you are transforming their lives through
+						our programs. Get inspired by real-life stories of personal and professional growth.
+					</li>
+					<li>
+						Impact Insights: Learn how your participation is driving meaningful change. We’ll share
+						updates on how your support is helping to provide educational opportunities to
+						underserved communities.
+					</li>
+				</ul>
+				<span class="text-lg mt-4">
+					By signing up, you’re not just keeping in touch—you’re joining a community dedicated to
+					personal growth and social impact. Don’t miss out on this opportunity to stay informed and
+					make a difference!
+				</span>
+			</div>
+			<form
+				method="POST"
+				action={route('newsletterSignUp /rec-charity')}
+				class="flex flex-col card p-4 w-fit h-min"
+				use:form.enhance
+			>
+				<div class="flex gap-x-4">
+					<Field class="max-w-48 justify-self-end" {form} path="firstName">
+						<Label label="First Name" />
+						<Input type="text" />
+					</Field>
+					<Field class="max-w-48 justify-self-center" {form} path="lastName">
+						<Label label="Last Name" />
+						<Input type="text" />
+					</Field>
+				</div>
+				<Field class="col-span-2 max-w-48 justify-self-start" {form} path="email">
 					<Label label="Email" />
 					<Input type="email" />
 				</Field>
-			</div>
-			<button class="btn variant-filled self-end w-fit">Submit</button>
-		</form>
-	</div>
+				<button class="btn variant-filled mt-6 w-fit">Submit</button>
+			</form>
+		</div>
+	</section>
 </div>
 
 {#snippet programmingCourse({
