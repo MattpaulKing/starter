@@ -36,16 +36,24 @@
 	});
 </script>
 
-<div class="flex flex-col w-full">
-	<div
-		class="flex flex-col relative bg-gray-900 bg-opacity-85 justify-center items-center h-screen overflow-hidden w-full"
+<div class="flex flex-col items-center w-full">
+	<section
+		class="flex flex-col relative bg-gray-900 bg-opacity-85 justify-center h-screen overflow-hidden w-full"
 	>
-		<div class="flex flex-col px-2 text-white lg:mr-96 mt-28">
-			<h1 class="h1 text-7xl whitespace-nowrap font-bold">Spresso</h1>
-			<span class="text-xl mt-2">Computer programming for everyone</span>
-			<div class="flex gap-x-2 place-items-center mt-4 w-fit">
-				<button class="btn variant-filled-warning">Donate</button>
-				<button class="btn variant-filled-primary">Programs</button>
+		<div class="flex flex-col px-2">
+			<div class="container max-w-2xl lg:ml-48 text-white mt-28">
+				<h1 class="h1 text-3xl lg:text-7xl whitespace-nowrap font-bold">
+					Empowering the Next <br /> Generation of Coders
+				</h1>
+				<span class="text-xl mt-2"
+					>Our charity organization is dedicated to providing free programming courses to
+					underserved communities, helping them unlock their full potential and build a brighter
+					future.</span
+				>
+				<div class="flex gap-x-2 place-items-center mt-6 w-fit">
+					<button class="btn variant-filled-warning">Donate</button>
+					<button class="btn variant-filled">Programs</button>
+				</div>
 			</div>
 		</div>
 		{#key videoIdx}
@@ -60,7 +68,47 @@
 				<track kind="captions" />
 			</video>
 		{/key}
-	</div>
+	</section>
+
+	<section class="flex flex-col my-12 lg:my-24 px-2 w-full">
+		<div class="flex flex-col mb-12 lg:ml-48 space-y-4 lg:space-y-8">
+			<div class="flex flex-col">
+				<h2 class="h2 text-3xl tracking-tight lg:text-7xl text-balance font-bold">
+					Our Programming Courses
+				</h2>
+				<span class="text-lg ml-2 mt-6 text-pretty lg:max-w-2xl">
+					We offer a range of programming courses tailored to students of all skill levels, from
+					beginner to advanced. Our curriculum is designed to provide a solid foundation in coding
+					principles and practical, real-world applications.</span
+				>
+			</div>
+			<div class="flex flex-col lg:flex-row mx-auto w-full gap-y-10 gap-x-10 place-items-start">
+				{#each data.courses as course}
+					{@render programmingCourse(course)}
+				{/each}
+			</div>
+		</div>
+	</section>
+
+	<section class="flex flex-col my-12 lg:my-24 px-2 w-full">
+		<div class="flex flex-col mb-12 lg:ml-48 space-y-4 lg:space-y-8">
+			<div class="flex flex-col">
+				<h2 class="h2 text-3xl lg:text-7xl font-bold">The Team</h2>
+				<span class="text-lg max-w-2xl ml-4 mt-6">
+					Our dedicated team of instructors and volunteers are passionate about empowering the next
+					generation of coders. Get to know the key members of our organization.</span
+				>
+			</div>
+			<div
+				class="flex flex-col lg:flex-row gap-y-10 mx-auto h-max w-full gap-x-10 place-items-center"
+			>
+				{#each data.instructors as instructor}
+					{@render instructorBio(instructor)}
+				{/each}
+			</div>
+		</div>
+	</section>
+
 	<div class="flex mx-auto justify-center h-fit w-full bg-surface-50-900-token">
 		<form
 			method="POST"
@@ -86,33 +134,55 @@
 			<button class="btn variant-filled self-end w-fit">Submit</button>
 		</form>
 	</div>
-	<div class="flex pb-12 flex-col px-2 h-screen items-center bg-surface-100-800-token">
-		{#snippet programBio({ title, reversed }: { title: string; reversed: boolean })}
-			<div
-				class="flex flex-col w-fit mx-auto h-fit lg:flex-row mt-24 lg:gap-x-8 text-white {reversed
-					? 'lg:flex-row-reverse'
-					: ''}"
-			>
-				<div class="h-80 min-w-80 w-80 bg-gray-600"></div>
-				<div class="grid grid-rows-[auto_auto_1fr]">
-					<span class="font-bold mt-4 lg:mt-0 text-xl font-heading-token">{title}</span>
-					<span class="text-white lg:max-w-96"
-						>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-						dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-						Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-						mollit anim id est laborum</span
-					>
-					<button
-						class="btn variant-filled-primary self-end {reversed
-							? 'justify-self-start'
-							: 'justify-self-end'}">Register</button
-					>
-				</div>
-			</div>
-		{/snippet}
-		{@render programBio({ title: 'Something', reversed: false })}
-		{@render programBio({ title: 'Something Else', reversed: true })}
-	</div>
 </div>
+
+{#snippet programmingCourse({
+	id,
+	title,
+	description,
+	length,
+	skillLevel,
+	hours
+}: {
+	id: string;
+	title: string;
+	description: string;
+	length: string;
+	skillLevel: string;
+	hours: string;
+})}
+	<div
+		class="flex h-96 flex-col card p-4 max-w-96 justify-between border-surface-300-600-token rounded-lg border"
+	>
+		<span class="text-xl font-bold">{title}</span>
+		<span class="mt-2">{description}</span>
+		<div class="grid grid-cols-[auto_1fr] gap-x-2 mt-6">
+			<img src="/Calendar.png" class="dark:invert" alt="cal" />
+			<span>{length}</span>
+			<img src="/UsersThree.png" class="dark:invert" alt="users" />
+			<span>{skillLevel}</span>
+			<img src="/ClockCounterClockwise.png" class="dark:invert" alt="clock" />
+			<span>{hours}</span>
+		</div>
+		<a href="/rec-charity/programs/{id}" class="btn mt-6 self-start variant-filled">Learn More</a>
+	</div>
+{/snippet}
+{#snippet instructorBio({
+	name,
+	role,
+	description
+}: {
+	name: string;
+	role: string;
+	description: string;
+})}
+	<div
+		class="flex flex-col card h-64 p-4 max-w-96 gap-y-3 border-surface-300-600-token rounded-lg border"
+	>
+		<div class="flex flex-col">
+			<span class="text-xl font-bold">{name}</span>
+			<span class="mt-1">{role}</span>
+		</div>
+		<span class="text-surface-700-200-token">{description}</span>
+	</div>
+{/snippet}

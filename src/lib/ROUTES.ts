@@ -20,6 +20,7 @@ const PAGES = {
     return `/blog/${params.id}`
   },
   "/rec-charity": `/rec-charity`,
+  "/rec-charity/about": `/rec-charity/about`,
   "/restaurant": `/restaurant`,
   "/restaurant/about": `/restaurant/about`,
   "/restaurant/menu/[menuSection]": (params: { menuSection: (string | number) }) => {
@@ -160,7 +161,7 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 * ```
 */
 export type KIT_ROUTES = {
-  PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/blog': never, '/blog/[action=crud]': 'action', '/blog/[id=uuid]': 'id', '/rec-charity': never, '/restaurant': never, '/restaurant/about': never, '/restaurant/menu/[menuSection]': 'menuSection', '/restaurant/reservations': never, '/slow': never, '/todos': never, '/todos/[action=crud]': 'action' }
+  PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/blog': never, '/blog/[action=crud]': 'action', '/blog/[id=uuid]': 'id', '/rec-charity': never, '/rec-charity/about': never, '/restaurant': never, '/restaurant/about': never, '/restaurant/menu/[menuSection]': 'menuSection', '/restaurant/reservations': never, '/slow': never, '/todos': never, '/todos/[action=crud]': 'action' }
   SERVERS: { 'GET /auth/callback': never }
   ACTIONS: { 'signin /auth/login': never, 'register /auth/register': never, 'default /blog/[action=crud]': 'action', 'newsletterSignUp /rec-charity': never, 'default /todos/[action=crud]': 'action', 'lightmode /user/settings': never }
   LINKS: Record<string, never>
