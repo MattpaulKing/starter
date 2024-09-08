@@ -142,6 +142,7 @@
 				class="flex flex-col bg-stone-800 border border-stone-700 shadow shadow-stone-700 rounded-lg p-4 w-fit h-min"
 				use:form.enhance
 			>
+				<span class="text-xl font-bold mb-6">Newsletter Sign Up</span>
 				<div class="flex gap-x-4">
 					<Field class="max-w-48 justify-self-end" {form} path="firstName">
 						<Label label="First Name" />
@@ -152,11 +153,11 @@
 						<Input type="text" />
 					</Field>
 				</div>
-				<Field class="col-span-2 max-w-48 justify-self-start" {form} path="email">
+				<Field class="col-span-2 justify-self-start" {form} path="email">
 					<Label label="Email" />
 					<Input type="email" />
 				</Field>
-				<button class="btn variant-filled mt-6 w-fit">Submit</button>
+				<button class="btn variant-filled place-self-end mt-8 w-fit">Submit</button>
 			</form>
 		</div>
 	</section>
@@ -190,7 +191,7 @@
 			<img src="/ClockCounterClockwise.png" class="dark:invert" alt="clock" />
 			<span>{hours}</span>
 		</div>
-		<a href="/rec-charity/programs/{id}" class="btn mt-6 self-start variant-filled-secondary"
+		<a href="/rec-charity/courses/{id}" class="btn mt-6 self-start variant-filled-secondary"
 			>Learn More</a
 		>
 	</div>

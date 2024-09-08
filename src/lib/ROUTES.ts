@@ -21,7 +21,9 @@ const PAGES = {
   },
   "/rec-charity": `/rec-charity`,
   "/rec-charity/about": `/rec-charity/about`,
-  "/rec-charity/courses": `/rec-charity/courses`,
+  "/rec-charity/courses/[id=int]": (params: { id: (Parameters<typeof import('../params/int.ts').match>[0]) }) => {
+    return `/rec-charity/courses/${params.id}`
+  },
   "/rec-charity/team": `/rec-charity/team`,
   "/restaurant": `/restaurant`,
   "/restaurant/about": `/restaurant/about`,
@@ -163,7 +165,7 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 * ```
 */
 export type KIT_ROUTES = {
-  PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/blog': never, '/blog/[action=crud]': 'action', '/blog/[id=uuid]': 'id', '/rec-charity': never, '/rec-charity/about': never, '/rec-charity/courses': never, '/rec-charity/team': never, '/restaurant': never, '/restaurant/about': never, '/restaurant/menu/[menuSection]': 'menuSection', '/restaurant/reservations': never, '/slow': never, '/todos': never, '/todos/[action=crud]': 'action' }
+  PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/blog': never, '/blog/[action=crud]': 'action', '/blog/[id=uuid]': 'id', '/rec-charity': never, '/rec-charity/about': never, '/rec-charity/courses/[id=int]': 'id', '/rec-charity/team': never, '/restaurant': never, '/restaurant/about': never, '/restaurant/menu/[menuSection]': 'menuSection', '/restaurant/reservations': never, '/slow': never, '/todos': never, '/todos/[action=crud]': 'action' }
   SERVERS: { 'GET /auth/callback': never }
   ACTIONS: { 'signin /auth/login': never, 'register /auth/register': never, 'default /blog/[action=crud]': 'action', 'newsletterSignUp /rec-charity': never, 'default /todos/[action=crud]': 'action', 'lightmode /user/settings': never }
   LINKS: Record<string, never>
