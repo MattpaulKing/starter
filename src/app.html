@@ -1,28 +1,28 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <script nonce="%sveltekit.nonce%">
-    const elemHtmlClasses = document.documentElement.classList;
-		// Conditions
-		const condLocalStorageUserPrefs = localStorage.getItem('modeUserPrefers') === 'false';
-		const condLocalStorageUserPrefsExists = !('modeUserPrefers' in localStorage);
-		const condMatchMedia = window.matchMedia('(prefers-color-scheme: dark)').matches;
-		// Add/remove `.dark` class to HTML element
-		if (
-			condLocalStorageUserPrefs ||
-			(condLocalStorageUserPrefsExists && condMatchMedia)
-		) {
-			elemHtmlClasses.add('dark');
-		} else {
-			elemHtmlClasses.remove('dark');
-		}
-    </script>
+  <!--   <script nonce="%sveltekit.nonce%"> -->
+  <!--   const elemHtmlClasses = document.documentElement.classList; -->
+		<!-- // Conditions -->
+		<!-- const condLocalStorageUserPrefs = localStorage.getItem('modeUserPrefers') === 'false'; -->
+		<!-- const condLocalStorageUserPrefsExists = !('modeUserPrefers' in localStorage); -->
+		<!-- const condMatchMedia = window.matchMedia('(prefers-color-scheme: dark)').matches; -->
+		<!-- // Add/remove `.dark` class to HTML element -->
+		<!-- if ( -->
+		<!-- 	condLocalStorageUserPrefs || -->
+		<!-- 	(condLocalStorageUserPrefsExists && condMatchMedia) -->
+		<!-- ) { -->
+		<!-- 	elemHtmlClasses.add('dark'); -->
+		<!-- } else { -->
+		<!-- 	elemHtmlClasses.remove('dark'); -->
+		<!-- } -->
+  <!--   </script> -->
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		%sveltekit.head%
 	</head>
-	<body data-theme="pinche-app" data-sveltekit-preload-data="hover">
+	<body data-theme="pinche-brutal" data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
   </body>
 </html>

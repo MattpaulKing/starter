@@ -1,7 +1,7 @@
 
 import { join } from 'path';
 import { skeleton } from '@skeletonlabs/tw-plugin';
-import { pincheApp, pincheNeutral } from './theme';
+import { pincheApp, pincheBrutal, pincheNeutral } from './theme';
 import type { Config } from 'tailwindcss';
 
 const config = {
@@ -23,7 +23,8 @@ const config = {
       themes: {
         custom: [
           pincheApp,
-          pincheNeutral
+          pincheNeutral,
+          pincheBrutal
         ]
       }
     })

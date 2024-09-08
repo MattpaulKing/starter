@@ -8,6 +8,12 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Lexend-Mega';
+  src: url('/fonts/lexend/LexendMega-VariableFont_wght.ttf');
+  font-display: swap;
+}
+
 html,
 body {
   @apply h-full;
@@ -18,8 +24,19 @@ body {
 }
 
 :root {
-  --theme-font-family-heading: 'Poppins' !important;
   scrollbar-width: none;
+}
+
+:root [data-theme='pinche-app'] {
+  --theme-font-family-heading: 'Poppins' !important;
+}
+
+:root [data-theme='pinche-neutral'] {
+  --theme-font-family-heading: 'Poppins' !important;
+}
+
+:root [data-theme='pinche-brutal'] {
+  --theme-font-family-heading: 'Lexend-Mega' !important;
 }
 
 .input {
