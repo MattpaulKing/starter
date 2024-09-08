@@ -11,8 +11,7 @@
 	}
 	let pages = [
 		{ label: 'About Us', href: 'about' },
-		{ label: 'Our Team', href: 'team' },
-		{ label: 'Courses', href: 'courses', headings: ['seniors', 'women', 'youth'] }
+		{ label: 'Courses', href: 'courses', headings: ['Python', 'React', 'Data Structures'] }
 	];
 	let mobileMenuOpen = $state(false);
 </script>
@@ -39,10 +38,10 @@
 			<ul
 				class="hidden list-nav rounded-lg top-full bg-stone-900 w-full group-hover:flex flex-col absolute"
 			>
-				{#each headings as heading}
+				{#each headings as heading, idx}
 					<a
 						class="text-gray-50 capitalize font-heading-token hover:text-gray-300 text-lg"
-						href="/rec-charity/{href}#{heading}">{heading}</a
+						href="/rec-charity/courses/{idx + 1}">{heading}</a
 					>
 				{/each}
 			</ul>

@@ -12,6 +12,7 @@
 			<h2 class="h2 col-start-1 text-balance font-bold mb-4 text-5xl">
 				{data.course.title}
 			</h2>
+			<button class="btn w-fit variant-filled-secondary">Enroll</button>
 			<span class="font-bold mt-6">Course Overview: </span>
 			<span>{data.course.overview}</span>
 			<hr class="my-12" />
