@@ -16,7 +16,7 @@
 	<div
 		class="absolute {!hasShadow
 			? 'hidden'
-			: 'block'} bg-black rounded-md w-full h-full top-3 -right-3"
+			: 'block'} bg-black rounded-md rounded-br-token w-full h-full top-2 -right-2 md:top-3 md:-right-3"
 	></div>
 	<div
 		class="card z-10 p-4 flex flex-col w-full {classes} shadow-lg shadow-gray-700 rounded-token border-black border-2"
