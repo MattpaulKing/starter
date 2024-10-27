@@ -56,6 +56,42 @@ export type Database = {
           },
         ]
       }
+      services: {
+        Row: {
+          active: boolean | null
+          address: string | null
+          description: string | null
+          email: string | null
+          id: string
+          lat: number | null
+          lon: number | null
+          phone: string | null
+          title: string
+        }
+        Insert: {
+          active?: boolean | null
+          address?: string | null
+          description?: string | null
+          email?: string | null
+          id?: string
+          lat?: number | null
+          lon?: number | null
+          phone?: string | null
+          title: string
+        }
+        Update: {
+          active?: boolean | null
+          address?: string | null
+          description?: string | null
+          email?: string | null
+          id?: string
+          lat?: number | null
+          lon?: number | null
+          phone?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
       todos: {
         Row: {
           createdAt: string
@@ -115,6 +151,72 @@ export type Database = {
           reducedMotion?: boolean
           tableRows?: number
           userId?: string
+        }
+        Relationships: []
+      }
+      waves: {
+        Row: {
+          airTemperature: number
+          beach: string
+          createdAt: string | null
+          id: string | null
+          secondarySwellDirection: number
+          secondarySwellHeight: number
+          secondarySwellPeriod: number
+          swellDirection: number
+          swellHeight: number
+          swellPeriod: number
+          waveDirection: number
+          waveHeight: number
+          wavePeriod: number
+          waveTs: string
+          windDirection: number
+          windSpeed: number
+          windWaveDirection: number
+          windWaveHeight: number
+          windWavePeriod: number
+        }
+        Insert: {
+          airTemperature: number
+          beach: string
+          createdAt?: string | null
+          id?: string | null
+          secondarySwellDirection: number
+          secondarySwellHeight: number
+          secondarySwellPeriod: number
+          swellDirection: number
+          swellHeight: number
+          swellPeriod: number
+          waveDirection: number
+          waveHeight: number
+          wavePeriod: number
+          waveTs: string
+          windDirection: number
+          windSpeed: number
+          windWaveDirection: number
+          windWaveHeight: number
+          windWavePeriod: number
+        }
+        Update: {
+          airTemperature?: number
+          beach?: string
+          createdAt?: string | null
+          id?: string | null
+          secondarySwellDirection?: number
+          secondarySwellHeight?: number
+          secondarySwellPeriod?: number
+          swellDirection?: number
+          swellHeight?: number
+          swellPeriod?: number
+          waveDirection?: number
+          waveHeight?: number
+          wavePeriod?: number
+          waveTs?: string
+          windDirection?: number
+          windSpeed?: number
+          windWaveDirection?: number
+          windWaveHeight?: number
+          windWavePeriod?: number
         }
         Relationships: []
       }

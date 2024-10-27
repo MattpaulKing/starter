@@ -1,0 +1,6 @@
+export { default as TableStore } from "./TableStore.svelte"
+export { default as Th } from "./Th.svelte"
+export { default as Table } from "./Table.svelte"
+export { default as ColFilter } from "./ColFilter.svelte"
+export { default as ColSortBtn } from "./ColSortBtn.svelte"
+export type { TableData } from "./types"

@@ -31,18 +31,20 @@ const PAGES = {
     return `/restaurant/menu/${params.menuSection}`
   },
   "/restaurant/reservations": `/restaurant/reservations`,
-  "/slow": `/slow`,
+  "/table": `/table`,
   "/todos": `/todos`,
   "/todos/[action=crud]": (params: { action: (Parameters<typeof import('../params/crud.ts').match>[0]) }) => {
     return `/todos/${params.action}`
-  }
+  },
+  "/waves": `/waves`
 }
 
 /**
  * SERVERS
  */
 const SERVERS = {
-  "GET /auth/callback": `/auth/callback`
+  "GET /auth/callback": `/auth/callback`,
+  "GET /waves/api": `/waves/api`
 }
 
 /**
@@ -165,8 +167,8 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 * ```
 */
 export type KIT_ROUTES = {
-  PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/blog': never, '/blog/[action=crud]': 'action', '/blog/[id=uuid]': 'id', '/rec-charity': never, '/rec-charity/about': never, '/rec-charity/courses/[id=int]': 'id', '/rec-charity/team': never, '/restaurant': never, '/restaurant/about': never, '/restaurant/menu/[menuSection]': 'menuSection', '/restaurant/reservations': never, '/slow': never, '/todos': never, '/todos/[action=crud]': 'action' }
-  SERVERS: { 'GET /auth/callback': never }
+  PAGES: { '/': never, '/auth/login': never, '/auth/register': never, '/blog': never, '/blog/[action=crud]': 'action', '/blog/[id=uuid]': 'id', '/rec-charity': never, '/rec-charity/about': never, '/rec-charity/courses/[id=int]': 'id', '/rec-charity/team': never, '/restaurant': never, '/restaurant/about': never, '/restaurant/menu/[menuSection]': 'menuSection', '/restaurant/reservations': never, '/table': never, '/todos': never, '/todos/[action=crud]': 'action', '/waves': never }
+  SERVERS: { 'GET /auth/callback': never, 'GET /waves/api': never }
   ACTIONS: { 'signin /auth/login': never, 'register /auth/register': never, 'default /blog/[action=crud]': 'action', 'newsletterSignUp /rec-charity': never, 'default /todos/[action=crud]': 'action', 'lightmode /user/settings': never }
   LINKS: Record<string, never>
   Params: { action: never, id: never, menuSection: never }
