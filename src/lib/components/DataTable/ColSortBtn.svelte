@@ -1,16 +1,15 @@
-<script lang="ts">
-	import { getContext } from 'svelte';
-	import type { TableStore } from '.';
+<script lang="ts" generics="T extends Record<string, unknown>">
+	import { getColKey, type TableStore } from '.';
 	let {
 		tableStore,
 		label,
 		asc
 	}: {
-		tableStore: TableStore<Record<string, unknown>>;
+		tableStore: TableStore<T>;
 		label: string;
 		asc: boolean;
 	} = $props();
-	let key = getContext('key') as string;
+	let key = getColKey() as keyof T;
 </script>
 
 <button

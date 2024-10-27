@@ -1,11 +1,14 @@
-import type { TableData } from "$lib/components/DataTable";
-import type { Tables } from "$lib/db/types";
+import { unwrapQueryAndCount } from "$lib/db/helpers";
 import type { PageServerLoad } from "./$types";
 
-export const load: PageServerLoad = async ({ fetch, locals: { db } }) => {
-  const apiRoute = "/waves/api"
+export const load: PageServerLoad = async ({ locals: { db } }) => {
+  const today = new Date()
   return {
-    apiRoute,
-    waves: await fetch(apiRoute).then(async r => await r.json() as TableData<Tables<"waves">>)
+    waves: await db
+      .from("waves")
+      .select("*", { count: "estimated" })
+      .gte("waveTs", new Date(today.getUTCFullYear(), today.getUTCMonth(), today.getDate()).toISOString())
+      .order("waveTs", { ascending: true })
+      .then(unwrapQueryAndCount)
   }
 }

@@ -4,6 +4,7 @@
 	import Pagination from './Pagination.svelte';
 	import type { Snippet } from 'svelte';
 	import type { TableStore } from '.';
+	import { fade, fly } from 'svelte/transition';
 	let {
 		tableStore = $bindable(),
 		headers,
@@ -27,7 +28,7 @@
 				<tbody
 					class="[&>tr:last-child]:border-0! border-surface-500-400-token [&>tr_td]:border-surface-300-600-token [&>tr_td]:border-b [&>tr_td]:px-4"
 				>
-					{#each tableStore.visibleRows as rowData}
+					{#each tableStore.getPageRows() as rowData}
 						<tr>
 							{@render row(rowData)}
 						</tr>

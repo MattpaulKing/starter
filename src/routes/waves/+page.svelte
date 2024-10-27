@@ -1,9 +1,16 @@
 <script lang="ts">
 	import { AxisX, AxisY, Area, ChartCard, Tooltip } from '$lib/components/Chart';
 	import { scaleTime } from 'd3-scale';
-	import { Html, LayerCake, ScaledSvg } from 'layercake';
+	import { calcExtents, Html, LayerCake, ScaledSvg } from 'layercake';
 	import { curveBasisOpen } from 'd3-shape';
-	import { Table, ColFilter, ColSortBtn, Th } from '$lib/components/DataTable';
+	import {
+		Table,
+		ColMenu,
+		ColSortBtn,
+		Th,
+		ColDateFilter,
+		ColNumberFilter
+	} from '$lib/components/DataTable';
 	import { TableStore } from '$lib/components/DataTable';
 	import type { Tables } from '$lib/db/types.js';
 
@@ -12,25 +19,28 @@
 	let xScale = scaleTime();
 	let tableStore = $state(
 		new TableStore({
-			baseRoute: data.apiRoute,
-			rows: data.waves.rows,
-			count: data.waves.count,
+			rows: data.waves.data,
 			filters: {
 				waveTs: {
-					type: 'date-range',
-					values: {
-						min: new Date(2024, 9, 20, 0, 0, 0).getTime(),
-						max: new Date(2024, 9, 31, 0, 0, 0).getTime()
-					},
+					filter: 'date-range',
+					values: [new Date(2024, 9, 27, 0, 0, 0), new Date(2024, 9, 31, 0, 0, 0)],
 					range: {
-						min: new Date(2024, 9, 23).getTime(),
-						max: new Date(2024, 9, 31).getTime()
+						min: new Date(2024, 9, 23),
+						max: new Date(2024, 9, 31)
+					}
+				},
+				waveHeight: {
+					filter: 'number-range',
+					values: [0, 5],
+					range: {
+						min: 0,
+						max: 5
 					}
 				}
 			}
 		})
 	);
-	let dateMin = $state(new Date(2024, 10, 25));
+	// NOTE: Can use calcExtents to get the ranges
 </script>
 
 <div class="flex flex-col w-full h-full p-2 lg:p-8">
@@ -39,24 +49,24 @@
 		<Table bind:tableStore>
 			{#snippet headers()}
 				<Th>
-					<ColFilter {tableStore} label="Date" key="waveTs">
+					<ColMenu {tableStore} label="Date" key="waveTs">
 						<ColSortBtn {tableStore} label="Earliest to Latest" asc={true}></ColSortBtn>
 						<ColSortBtn {tableStore} label="Latest to Earliest" asc={false}></ColSortBtn>
 						<hr class="my-2" />
-						<label>
-							<span>Earliest Date</span>
-							<input
-								type="date"
-								autocomplete="off"
-								class="input [&::-webkit-calendar-picker-indicator]:scale-150 [&::-webkit-calendar-picker-indicator]:bg-[url('/Calendar.png')] [&::-webkit-calendar-picker-indicator]:dark:invert"
-								name={''}
-								bind:value={tableStore.filters.waveTs.values.min}
-							/>
-						</label>
-					</ColFilter>
+						<ColDateFilter bind:tableStore label="Earliest Date" side={0}></ColDateFilter>
+						<ColDateFilter bind:tableStore label="Latest Date" side={1}></ColDateFilter>
+					</ColMenu>
 				</Th>
 				<Th>Time</Th>
-				<Th resizable={false}>Wave Height (m)</Th>
+				<Th>
+					<ColMenu {tableStore} label="Wave Height (m)" key="waveHeight">
+						<ColSortBtn {tableStore} label="Smallest to Largest" asc={true}></ColSortBtn>
+						<ColSortBtn {tableStore} label="Largest to Smallest" asc={false}></ColSortBtn>
+						<hr class="my-2" />
+						<ColNumberFilter bind:tableStore label="Minimum" side={0}></ColNumberFilter>
+						<ColNumberFilter bind:tableStore label="Maximum" side={1}></ColNumberFilter>
+					</ColMenu>
+				</Th>
 			{/snippet}
 			{#snippet row(d: Tables<'waves'>)}
 				<td>
@@ -86,7 +96,7 @@
 					y="waveHeight"
 					yDomain={[0, null]}
 					{xScale}
-					data={data.waves.rows}
+					data={data.waves.data}
 					let:xDomain
 					let:xScale
 				>

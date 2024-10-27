@@ -4,11 +4,11 @@ export type TableStoreFilters<T> = Record<keyof T, {
   values: T[keyof T][]
 } | {
   filter: "date-range",
-  values: { min: number, max: number },
-  range: { min: number, max: number }
+  values: [Date, Date],
+  range: { min: Date, max: Date }
 } | {
   filter: "number-range",
-  values: { min: number, max: number },
+  values: [number, number],
   range: { min: number, max: number }
 }>
 
@@ -27,7 +27,6 @@ export default class <T extends Record<string, unknown>> {
 
   baseRoute = $state("")
   rows = $state<T[]>([])
-  count = $state(0)
   filters = $state<TableStoreFilters<T>>({} as TableStoreFilters<T>)
   state = $state({
     pageNumber: 0,
@@ -42,12 +41,12 @@ export default class <T extends Record<string, unknown>> {
         if (this.filters[key].filter === "select" && !this.filters[key].values.includes(row[key])) {
           return false
         } else if (this.filters[key].filter === "number-range" && typeof row[key] === "number") {
-          if (row[key] < this.filters[key].values.min || row[key] > this.filters[key].values.max) {
+          if (row[key] < this.filters[key].values[0] || row[key] > this.filters[key].values[1]) {
             return false
           }
         } else if (this.filters[key].filter === "date-range") {
           let seconds = new Date(String(row[key])).getTime()
-          if (seconds < this.filters[key].values.min || seconds > this.filters[key].values.max) {
+          if (seconds < this.filters[key].values[0].getTime() || seconds > this.filters[key].values[1].getTime()) {
             return false
           }
         }
@@ -62,11 +61,9 @@ export default class <T extends Record<string, unknown>> {
         res = res.sort((a, b) => a[by] < b[by] ? 1 : -1)
       }
     }
-    return res.slice(
-      this.state.pageNumber * this.state.rowsPerPage,
-      (this.state.pageNumber + 1) * this.state.rowsPerPage
-    )
+    return res
   })
+  count = $derived(this.visibleRows.length)
   sort = $state(null as TableStoreSort<T> | null)
   pageCount = $derived(Math.ceil(this.count / this.state.rowsPerPage))
   pages = $derived.by(() => {
@@ -105,9 +102,7 @@ export default class <T extends Record<string, unknown>> {
   })
 
   constructor({
-    baseRoute,
     rows,
-    count,
     filters,
     state = null,
     sort = null }: {
@@ -118,9 +113,7 @@ export default class <T extends Record<string, unknown>> {
       state?: TableStoreState<T> | null,
       sort?: TableStoreSort<T>
     }) {
-    this.baseRoute = baseRoute
     this.rows = rows
-    this.count = count
     this.filters = filters
     if (state) {
       this.state = {
@@ -137,6 +130,13 @@ export default class <T extends Record<string, unknown>> {
     }
   }
 
+  getPageRows() {
+    return this.visibleRows.slice(
+      this.state.pageNumber * this.state.rowsPerPage,
+      (this.state.pageNumber + 1) * this.state.rowsPerPage
+    )
+  }
+
   addSelectFilter({ col, value }: { col: keyof T, value: T[keyof T] }) {
     if (this.filters[col].filter !== "select") return
     this.filters[col].values.push(value)
@@ -147,10 +147,9 @@ export default class <T extends Record<string, unknown>> {
     this.filters[col].values.filter((filterValue) => filterValue !== value)
   }
 
-  setRangeFilter({ col, min, max }: { col: keyof T, min?: number, max?: number }) {
+  setRangeFilter({ col, value, valueIdx }: { col: keyof T, value: Date | number, valueIdx: 0 | 1 }) {
     if (this.filters[col].filter !== "date-range" && this.filters[col].filter !== "number-range") return
-    this.filters[col].values.min = min ?? this.filters[col].range.min
-    this.filters[col].values.max = max ?? this.filters[col].range.max
+    this.filters[col].values[valueIdx] = value
   }
 
   clearFilters() {
@@ -163,8 +162,8 @@ export default class <T extends Record<string, unknown>> {
     if (this.filters[key].filter === "select") {
       this.filters[key].values = []
     } else {
-      this.filters[key].values.min = this.filters[key].range.min
-      this.filters[key].values.max = this.filters[key].range.max
+      this.filters[key].values[0] = this.filters[key].range.min
+      this.filters[key].values[1] = this.filters[key].range.max
     }
   }
 
