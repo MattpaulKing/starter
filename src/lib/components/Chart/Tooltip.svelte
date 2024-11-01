@@ -44,7 +44,6 @@
 				};
 			})
 			.sort((a, b) => b.value - a.value);
-
 		return rows;
 	}
 </script>
@@ -52,13 +51,14 @@
 <QuadTree dataset={dataset || $data} y="x" let:x let:y let:visible let:found let:e>
 	{@const foundSorted = sortResult(found)}
 	{#if visible === true}
-		<div style="left:{(x / 100) * $width}px;" class="line"></div>
+		<div style="left:{(x / 100) * $width}px;" class="line border border-dashed"></div>
 		<div
-			class="tooltip card rounded-token"
+			class="tooltip card z-50 rounded-token"
 			style="
         width:{w}px;
         display: {visible ? 'block' : 'none'};
-        top:calc({$yScale(foundSorted[0].value)}% + {offset}%);
+        /* top:calc({$yScale(foundSorted[0].value)}% + {offset}%); */
+        top:50px;
         left:{Math.min(Math.max(w2, (x / 100) * $width), $width - w2)}px;"
 		>
 			<div class="title">{formatTitle($config.x(found))}</div>
@@ -89,7 +89,6 @@
 		top: 0;
 		bottom: 0;
 		width: 1px;
-		border-left: 1px dotted #666;
 		pointer-events: none;
 	}
 	.tooltip,

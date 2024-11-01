@@ -5,6 +5,7 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
 	import { area, curveLinear } from 'd3-shape';
+	import { fade } from 'svelte/transition';
 	import type { CurveFactory } from 'd3-shape';
 	import type { LayerCakeContext } from './types';
 
@@ -24,4 +25,6 @@
 	});
 </script>
 
-<path class="path-area {classes}" d={path($data)}></path>
+{#key path}
+	<path transition:fade class={classes} d={path($data)}></path>
+{/key}

@@ -1,16 +1,41 @@
+// export type TableStoreFilters<T> = Record<keyof T, {
+//   filter: "select",
+//   values: T[keyof T][]
+//   range: T[keyof T][]
+// } | {
+//   filter: "date-range",
+//   values: [Date, Date],
+//   strValues: [string, string],
+//   range: [Date, Date],
+// } | {
+//   filter: "number-range",
+//   values: [number, number],
+//   range: [number, number]
+// }>
 
-export type TableStoreFilters<T> = Record<keyof T, {
-  filter: "select",
-  values: T[keyof T][]
-} | {
-  filter: "date-range",
+type Literal<A, B extends A> = B
+export type FilterTypes = "date-range" | "number-range" | "select"
+
+export type FilterDateRange = {
+  filter: Literal<FilterTypes, "date-range">,
   values: [Date, Date],
-  range: { min: Date, max: Date }
-} | {
-  filter: "number-range",
+  strValues: [string, string],
+  range: [Date, Date],
+}
+
+export type FilterNumberRange = {
+  filter: Literal<FilterTypes, "number-range">,
   values: [number, number],
-  range: { min: number, max: number }
-}>
+  range: [number, number],
+}
+
+export type FilterSelectRange = {
+  filter: Literal<FilterTypes, "select">
+  values: string[],
+  range: string[],
+}
+
+export type TableStoreFilters<T> = Record<keyof T, FilterDateRange | FilterNumberRange | FilterSelectRange>
 
 export type TableStoreState<T> = {
   pageNumber: number;
@@ -25,7 +50,6 @@ export type TableStoreApiResponse<T extends Record<string, unknown>> = { count: 
 
 export default class <T extends Record<string, unknown>> {
 
-  baseRoute = $state("")
   rows = $state<T[]>([])
   filters = $state<TableStoreFilters<T>>({} as TableStoreFilters<T>)
   state = $state({
@@ -38,14 +62,14 @@ export default class <T extends Record<string, unknown>> {
     let res = this.rows.filter((row) => {
       for (let rowKey of Object.keys(this.filters)) {
         let key = rowKey as keyof T
-        if (this.filters[key].filter === "select" && !this.filters[key].values.includes(row[key])) {
+        if (this.filters[key].filter === "select" && !this.filters[key].values.includes(String(row[key]))) {
           return false
         } else if (this.filters[key].filter === "number-range" && typeof row[key] === "number") {
           if (row[key] < this.filters[key].values[0] || row[key] > this.filters[key].values[1]) {
             return false
           }
-        } else if (this.filters[key].filter === "date-range") {
-          let seconds = new Date(String(row[key])).getTime()
+        } else if (this.filters[key].filter === "date-range" && row[key] instanceof Date) {
+          let seconds = row[key].getTime()
           if (seconds < this.filters[key].values[0].getTime() || seconds > this.filters[key].values[1].getTime()) {
             return false
           }
@@ -106,9 +130,7 @@ export default class <T extends Record<string, unknown>> {
     filters,
     state = null,
     sort = null }: {
-      baseRoute: string,
       rows: T[],
-      count: number,
       filters: TableStoreFilters<T>,
       state?: TableStoreState<T> | null,
       sort?: TableStoreSort<T>
@@ -137,7 +159,7 @@ export default class <T extends Record<string, unknown>> {
     )
   }
 
-  addSelectFilter({ col, value }: { col: keyof T, value: T[keyof T] }) {
+  addSelectFilter({ col, value }: { col: keyof T, value: string }) {
     if (this.filters[col].filter !== "select") return
     this.filters[col].values.push(value)
   }
@@ -162,8 +184,11 @@ export default class <T extends Record<string, unknown>> {
     if (this.filters[key].filter === "select") {
       this.filters[key].values = []
     } else {
-      this.filters[key].values[0] = this.filters[key].range.min
-      this.filters[key].values[1] = this.filters[key].range.max
+      this.filters[key].values[0] = this.filters[key].range[0]
+      this.filters[key].values[1] = this.filters[key].range[1]
+    }
+    if ("strValues" in this.filters[key]) {
+      this.filters[key].strValues = [this.filters[key].values[0].toISOString().slice(0, 10), this.filters[key].values[1].toISOString().slice(0, 10)]
     }
   }
 

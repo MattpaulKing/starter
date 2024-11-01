@@ -1,6 +1,16 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
+	let {
+		popoverOpen = $bindable(false),
+		class: classes,
+		children
+	}: {
+		popoverOpen: boolean;
+		class?: string;
+		children: Snippet;
+	} = $props();
+
 	function onfocusout(e: FocusEvent) {
 		if (!containerEl?.contains(e.relatedTarget as Node | null)) {
 			popoverOpen = false;
@@ -11,16 +21,6 @@
 			popoverOpen = false;
 		}
 	}
-
-	let {
-		popoverOpen = $bindable(false),
-		class: classes,
-		children
-	}: {
-		popoverOpen: boolean;
-		class?: string;
-		children: Snippet;
-	} = $props();
 
 	let containerEl: HTMLDivElement | undefined = $state();
 </script>

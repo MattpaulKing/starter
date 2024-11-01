@@ -5,16 +5,14 @@
 	let selectedRowsPerPage = $state(tableStore.state.rowsPerPage);
 </script>
 
-<aside class="flex place-items-start">
-	<select
-		class="select ml-2 h-min w-28"
-		bind:value={selectedRowsPerPage}
-		onchange={() => tableStore.setRowsPerPage(selectedRowsPerPage)}
-	>
-		{#each options as option}
-			<option value={option}>
-				{option} Rows
-			</option>
-		{/each}
-	</select>
-</aside>
+<select
+	class="select text-sm h-min w-28"
+	bind:value={selectedRowsPerPage}
+	onchange={() => tableStore.setRowsPerPage(selectedRowsPerPage)}
+>
+	{#each options as option}
+		<option value={option}>
+			{option} Rows
+		</option>
+	{/each}
+</select>
