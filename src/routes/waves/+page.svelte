@@ -41,7 +41,7 @@
 
 <div class="flex flex-col w-full h-full p-2 lg:p-8">
 	<h1 class="h1 font-bold">Waves</h1>
-	<div class="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-24 w-full h-full">
+	<div class="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-24 w-full h-fit">
 		<div class="flex lg:col-span-2 w-full">
 			<Table bind:tableStore>
 				{#snippet headers()}
@@ -82,7 +82,7 @@
 				{/snippet}
 			</Table>
 		</div>
-		<ChartCard class="lg:col-span-3 w-full h-fit">
+		<ChartCard class="lg:col-span-3 lg:place-self-center w-full h-fit">
 			{#snippet title()}
 				<div class="flex flex-col">
 					<span class="text-xl font-bold">Wave Height</span>
@@ -107,7 +107,7 @@
 						<AxisY ticks={8} />
 					</Html>
 					<ScaledSvg>
-						<Area curve={curveBasisOpen} class="fill-primary-700 opacity-80" />
+						<Area curve={curveBasisOpen} class="fill-tertiary-700 " />
 					</ScaledSvg>
 					<Html>
 						<Tooltip
