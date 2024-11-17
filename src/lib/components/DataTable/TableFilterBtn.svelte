@@ -53,7 +53,10 @@
 		Filters
 	</button>
 	{#if popoverOpen}
-		<div transition:fade class="card z-10 absolute top-full p-4">
+		<div
+			transition:fade
+			class="card z-10 absolute top-full p-4 border border-surface-500-400-token right-0"
+		>
 			<ul class="space-y-2">
 				{#each Object.entries(tableStore.filters) as [key, filter]}
 					<li>
