@@ -15,7 +15,7 @@
 	let numberProxy = $state(tableStore.filters[key].values[side] as number);
 
 	function updateFilter() {
-		tableStore.setRangeFilter({
+		tableStore.setNumberFilterValue({
 			col: key,
 			value: numberProxy,
 			valueIdx: side

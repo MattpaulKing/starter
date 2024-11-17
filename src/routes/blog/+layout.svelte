@@ -52,7 +52,7 @@
 		</div>
 
 		{#if user}
-			<Popover class="h-9" bind:popoverOpen={userMenuOpen}>
+			<Popover class="h-9" onClickOutside={() => (userMenuOpen = false)}>
 				<button onclick={() => (userMenuOpen = !userMenuOpen)}>
 					<Avatar
 						initials="MK"

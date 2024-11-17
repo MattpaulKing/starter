@@ -18,7 +18,7 @@
 		dropdownOpen = true;
 	}
 	function resetFilters() {
-		tableStore.resetColFilters(key);
+		tableStore.resetCol(key);
 	}
 	let dropdownOpen = $state(false);
 	setColKey(key);
@@ -43,9 +43,8 @@
 			<div transition:fade class="card absolute left-1/2 top-4 z-30 w-fit min-w-72 flex-col p-4">
 				<div class="flex justify-between mb-4 place-items-center">
 					<span class="font-bold text-xl">{label}</span>
-					<button
-						onclick={() => tableStore.resetCol(key)}
-						class="btn btn-sm variant-ghost hover:variant-filled-error">Clear</button
+					<button onclick={resetFilters} class="btn btn-sm variant-ghost hover:variant-filled-error"
+						>Clear</button
 					>
 				</div>
 				{@render children()}

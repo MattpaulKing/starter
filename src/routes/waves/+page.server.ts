@@ -8,7 +8,7 @@ export const load: PageServerLoad = async ({ locals: { db } }) => {
     waves: await db
       .from("waves")
       .select("waveTs, waveHeight", { count: "estimated" })
-      .gt("waveTs", new Date(today.getUTCFullYear(), today.getUTCMonth(), today.getDate() - 1).toISOString())
+      // .gt("waveTs", new Date(today.getUTCFullYear(), today.getUTCMonth(), today.getDate() - 1).toISOString())
       .order("waveTs", { ascending: true })
       .then(unwrapQueryAndCount)
       .then(({ count, data }) => ({

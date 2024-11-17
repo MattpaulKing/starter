@@ -13,6 +13,8 @@
 //   range: [number, number]
 // }>
 
+import type { TableStore } from "."
+
 type Literal<A, B extends A> = B
 export type FilterTypes = "date-range" | "number-range" | "select"
 
@@ -47,17 +49,30 @@ export type TableStoreSort<T> = null | {
   asc: boolean
 }
 export type TableStoreApiResponse<T extends Record<string, unknown>> = { count: number, rows: T[] }
+export type FiltersApplied = { count: number; filters: { key: string; selected: string[] }[] };
 
 export default class <T extends Record<string, unknown>> {
 
   rows = $state<T[]>([])
-  filters = $state<TableStoreFilters<T>>({} as TableStoreFilters<T>)
   state = $state({
     pageNumber: 0,
     rowsPerPage: 10,
     search: {}
   } as TableStoreState<T>)
-
+  filters = $state({}) as TableStoreFilters<T>
+  filterCount = $derived.by(() => {
+    let count = 0
+    for (let key in this.filters) {
+      if (this.filters[key].filter === 'select') {
+        count += this.filters[key].values.length;
+      } else if (
+        (this.filters[key].filter === 'date-range' || this.filters[key].filter === "number-range") && this.isRangeFilterApplied({ key })
+      ) {
+        count += 1;
+      }
+    }
+    return count;
+  })
   visibleRows = $derived.by(() => {
     let res = this.rows.filter((row) => {
       for (let rowKey of Object.keys(this.filters)) {
@@ -169,9 +184,32 @@ export default class <T extends Record<string, unknown>> {
     this.filters[col].values.filter((filterValue) => filterValue !== value)
   }
 
-  setRangeFilter({ col, value, valueIdx }: { col: keyof T, value: Date | number, valueIdx: 0 | 1 }) {
+  removeFilterValue({ key, idx }: { key: keyof TableStore<T>["filters"], idx: number }) {
+    if (this.filters[key]["filter"] === "select") {
+      this.filters[key]["values"].splice(idx)
+    } else if (this.filters[key]['filter'] === "number-range") {
+      this.filters[key]["values"][idx] = this.filters[key]['range'][idx]
+    } else if (this.filters[key]["filter"] === "date-range") {
+      this.filters[key]["values"][idx] = this.filters[key]['range'][idx]
+      this.filters[key]['strValues'][idx] = this.filters[key]['values'][idx].toISOString().slice(0, 10)
+    }
+  }
+
+  setNumberFilterValue({ col, value, valueIdx }: { col: keyof T, value: Date | number, valueIdx: 0 | 1 }) {
     if (this.filters[col].filter !== "date-range" && this.filters[col].filter !== "number-range") return
     this.filters[col].values[valueIdx] = value
+  }
+
+  setDateFilterValue({ col, localDateStr, idx }: { col: keyof T, localDateStr: string, idx: 0 | 1 }) {
+    if (this.filters[col]['filter'] !== 'date-range') return localDateStr
+    let localDate = new Date(localDateStr);
+    this.filters[col]['values'][idx] = new Date(localDate.getTimezoneOffset() * 60 * 1000 + localDate.getTime());
+    this.filters[col]['strValues'][idx] = this.filters[col]['values'][idx].toISOString().slice(0, 10);
+  }
+
+  getDateRange({ col }: { col: keyof T }) {
+    if (this.filters[col]['filter'] !== 'date-range') return ["", ""]
+    return [this.filters[col].range[0].toISOString(), this.filters[col].range[1].toISOString()] as [string, string]
   }
 
   clearFilters() {
@@ -221,5 +259,10 @@ export default class <T extends Record<string, unknown>> {
     } else {
       this.rows = this.rows.sort((a, b) => a[by] < b[by] ? 1 : -1)
     }
+  }
+
+  isRangeFilterApplied({ key }: { key: keyof T }) {
+    return this.filters[key].values[0] !== this.filters[key].range[0] ||
+      this.filters[key].values[1] !== this.filters[key].range[1]
   }
 }

@@ -10,4 +10,5 @@ export { default as RowCount } from './RowCount.svelte'
 export { default as RowsPerView } from './RowsPerView.svelte'
 export { default as Pagination } from './Pagination.svelte'
 export { default as rowsToRanges } from "./rowsToRanges.svelte"
+export { default as TableFilterBtn } from "./TableFilterBtn.svelte"
 export type { TableData } from "./types"

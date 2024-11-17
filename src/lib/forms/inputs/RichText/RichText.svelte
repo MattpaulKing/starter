@@ -85,7 +85,7 @@
 >
 	{#if editor}
 		<div role="menubar" tabindex="-1" class="bg-surface-200-700-token flex h-8 w-full">
-			<Popover class="h-9" bind:popoverOpen={headingMenuOpen}>
+			<Popover class="h-9" onClickOutside={() => (headingMenuOpen = false)}>
 				<TextCommandBtn active={headingActive} onclick={() => (headingMenuOpen = true)}>
 					<span class="font-normal">Aa</span>
 				</TextCommandBtn>

@@ -49,8 +49,8 @@
 				communities, helping them unlock their full potential and build a brighter future.</span
 			>
 			<div class="flex gap-x-2 place-items-center mt-8 w-fit">
-				<button class="btn variant-filled-secondary">Donate</button>
-				<button class="btn variant-ghost-surface">Programs</button>
+				<button class="btn variant-filled-warning">Donate</button>
+				<button class="btn variant-ghost">Programs</button>
 			</div>
 		</div>
 		{#key videoIdx}

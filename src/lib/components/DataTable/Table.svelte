@@ -1,15 +1,23 @@
 <script lang="ts" generics="T extends Record<string, unknown>">
 	import { RowCount, RowsPerView, Pagination } from '.';
 	import { OptionsMenu } from '../Buttons';
-	import type { Snippet } from 'svelte';
-	import type { TableStore } from '.';
 	import { fade } from 'svelte/transition';
+	import type { Snippet } from 'svelte';
+	import { TableFilterBtn, type TableStore } from '.';
+
 	let {
 		tableStore = $bindable(),
 		title,
+		// filterBtn,
 		headers,
 		row
-	}: { tableStore: TableStore<T>; title?: Snippet; headers: Snippet; row: Snippet<[T]> } = $props();
+	}: {
+		tableStore: TableStore<T>;
+		title?: Snippet;
+		// filterBtn: Snippet;
+		headers: Snippet;
+		row: Snippet<[T]>;
+	} = $props();
 	let pageRows = $derived(tableStore.getPageRows());
 </script>
 
@@ -18,20 +26,24 @@
 		{#if title}
 			{@render title()}
 		{/if}
-		<OptionsMenu>
-			<div class="card space-y-2 p-4 flex flex-col w-fit border border-surface-500-400-token">
-				<span class="font-bold">Options</span>
-				<hr class="" />
-				<ul class="[&>li>*]:text-sm w-full">
-					<li class="flex w-full">
-						<button class="btn flex w-full hover:variant-ghost">
-							<img src="/Download.png" class="dark:invert w-6 h-6" alt="icon" />
-							<span>Export</span>
-						</button>
-					</li>
-				</ul>
-			</div>
-		</OptionsMenu>
+		<div class="flex gap-x-1">
+			<TableFilterBtn {tableStore}></TableFilterBtn>
+			<div></div>
+			<OptionsMenu>
+				<div class="card space-y-2 p-4 flex flex-col w-fit border border-surface-500-400-token">
+					<span class="font-bold">Options</span>
+					<hr class="" />
+					<ul class="[&>li>*]:text-sm w-full">
+						<li class="flex w-full">
+							<button class="btn flex w-full hover:variant-ghost">
+								<img src="/Download.png" class="dark:invert w-6 h-6" alt="icon" />
+								<span>Export</span>
+							</button>
+						</li>
+					</ul>
+				</div>
+			</OptionsMenu>
+		</div>
 	</header>
 	<div
 		class="border-surface-500-400-token h-fit w-full rounded-token border border-collapse bg-surface-50 py-0.5 dark:bg-surface-800"

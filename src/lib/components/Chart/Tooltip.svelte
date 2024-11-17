@@ -57,7 +57,6 @@
 			style="
         width:{w}px;
         display: {visible ? 'block' : 'none'};
-        /* top:calc({$yScale(foundSorted[0].value)}% + {offset}%); */
         top:50px;
         left:{Math.min(Math.max(w2, (x / 100) * $width), $width - w2)}px;"
 		>

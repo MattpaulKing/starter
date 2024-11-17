@@ -50,17 +50,9 @@
 							<ColSortBtn {tableStore} label="Earliest to Latest" asc={true}></ColSortBtn>
 							<ColSortBtn {tableStore} label="Latest to Earliest" asc={false}></ColSortBtn>
 							<hr class="my-2" />
-							<ColDateFilter
-								label="Earliest Date"
-								bind:value={filters.waveTs.values[0]}
-								bind:dateStr={filters.waveTs.strValues[0]}
-								dateRange={filters.waveTs.range}
+							<ColDateFilter label="Earliest Date" idx={0} bind:filter={filters.waveTs}
 							></ColDateFilter>
-							<ColDateFilter
-								label="Latest Date"
-								bind:value={filters.waveTs.values[1]}
-								bind:dateStr={filters.waveTs.strValues[1]}
-								dateRange={filters.waveTs.range}
+							<ColDateFilter label="Latest Date" idx={1} bind:filter={filters.waveTs}
 							></ColDateFilter>
 						</ColMenu>
 					</Th>

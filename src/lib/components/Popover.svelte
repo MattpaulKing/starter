@@ -1,31 +1,18 @@
 <script lang="ts">
+	import { clickOutside } from '$lib/actions';
 	import type { Snippet } from 'svelte';
 
 	let {
-		popoverOpen = $bindable(false),
+		onClickOutside,
 		class: classes,
 		children
 	}: {
-		popoverOpen: boolean;
+		onClickOutside: () => void;
 		class?: string;
 		children: Snippet;
 	} = $props();
-
-	function onfocusout(e: FocusEvent) {
-		if (!containerEl?.contains(e.relatedTarget as Node | null)) {
-			popoverOpen = false;
-		}
-	}
-	function onkeydown(e: KeyboardEvent) {
-		if (e.key === 'Escape' && popoverOpen) {
-			popoverOpen = false;
-		}
-	}
-
-	let containerEl: HTMLDivElement | undefined = $state();
 </script>
 
-<svelte:window {onfocusout} {onkeydown} />
-<div bind:this={containerEl} class="relative p-0! m-0! overflow-visible {classes}">
+<div use:clickOutside={onClickOutside} class="relative p-0! m-0! overflow-visible {classes}">
 	{@render children()}
 </div>

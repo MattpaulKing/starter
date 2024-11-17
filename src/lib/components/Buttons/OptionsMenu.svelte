@@ -10,10 +10,10 @@
 </script>
 
 <div class="flex relative justify-end gap-x-2" bind:this={btnContainer}>
-	<Popover class="h-9" bind:popoverOpen={menuOpen}>
+	<Popover class="h-9" onClickOutside={() => (menuOpen = false)}>
 		<button
 			onclick={() => (menuOpen = !menuOpen)}
-			class="btn-icon btn-icon-sm flex place-items-center variant-ghost rounded-token"
+			class="btn-icon aspect-square btn-icon-sm h-full flex place-items-center variant-ghost rounded-token"
 		>
 			{#if btnImg}
 				{@render btnImg()}

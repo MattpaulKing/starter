@@ -1,20 +1,19 @@
 <script lang="ts">
+	import type { FilterDateRange } from './TableStore.svelte';
+
 	let {
-		label,
-		value = $bindable(),
-		dateStr = $bindable(),
-		dateRange
+		filter = $bindable(),
+		idx,
+		label
 	}: {
+		filter: FilterDateRange;
+		idx: number;
 		label: string;
-		value: Date;
-		dateStr: string;
-		dateRange: [Date, Date];
 	} = $props();
 
 	function updateFilter() {
-		let localDate = new Date(dateStr);
-		value = new Date(localDate.getTimezoneOffset() * 60 * 1000 + localDate.getTime());
-		dateStr = value.toISOString().slice(0, 10);
+		let localDate = new Date(filter.strValues[idx]);
+		filter.values[idx] = new Date(localDate.getTimezoneOffset() * 60 * 1000 + localDate.getTime());
 	}
 </script>
 
@@ -24,8 +23,8 @@
 		type="date"
 		class="input"
 		oninput={updateFilter}
-		bind:value={dateStr}
-		min={dateRange[0].toISOString().slice(0, 10)}
-		max={dateRange[1].toISOString().slice(0, 10)}
+		bind:value={filter.strValues[idx]}
+		min={filter.range[0].toISOString().slice(0, 10)}
+		max={filter.range[1].toISOString().slice(0, 10)}
 	/>
 </label>
