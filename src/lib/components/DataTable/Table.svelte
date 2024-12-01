@@ -1,10 +1,10 @@
 <script lang="ts" generics="T extends Record<string, unknown>">
 	import { RowCount, RowsPerView, Pagination } from '.';
-	import { OptionsMenu } from '../Buttons';
+	import { OptionsMenu, OptionsMenuItem } from '../Buttons';
 	import { fade } from 'svelte/transition';
 	import { TableFilterBtn, type TableStore } from '.';
+	import { downloadCSV } from '$lib';
 	import type { Snippet } from 'svelte';
-	import OptionsMenuItem from '../Buttons/OptionsMenuItem.svelte';
 
 	let {
 		tableStore = $bindable(),
@@ -32,7 +32,10 @@
 				{#snippet title()}
 					Options
 				{/snippet}
-				<OptionsMenuItem>
+				<OptionsMenuItem
+					onclick={() =>
+						downloadCSV({ content: tableStore.visibleRows, filename: 'table-data.csv' })}
+				>
 					<img src="/Download.png" class="dark:invert w-6 h-6" alt="icon" />
 					<span>Export CSV</span>
 				</OptionsMenuItem>
