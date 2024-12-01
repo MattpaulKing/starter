@@ -34,7 +34,6 @@
 			return dateFormatter(filterValue);
 		}
 	}
-	$inspect(tableStore.filters);
 	function removeFilterValue({ e, key, idx }: { e: MouseEvent; key: keyof T; idx: number }) {
 		e.stopPropagation();
 		tableStore.removeFilterValue({ key, idx });
@@ -47,9 +46,11 @@
 <Popover onClickOutside={() => (popoverOpen = false)}>
 	<button
 		onclick={togglePopover}
-		class="btn h-9 btn-sm {tableStore.filterCount > 0 ? 'variant-ghost' : 'variant-soft-surface'}"
+		class="btn gap-x-1 h-9 btn-sm {tableStore.filterCount > 0
+			? 'variant-ghost'
+			: 'variant-soft-surface'}"
 	>
-		<FunnelIcon filterCount={tableStore.filterCount} class=" h-8" />
+		<FunnelIcon filterCount={tableStore.filterCount} class="" />
 		Filters
 	</button>
 	{#if popoverOpen}

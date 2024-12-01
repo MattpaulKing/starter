@@ -13,6 +13,7 @@
 	} from '$lib/components/DataTable';
 	import { TableStore } from '$lib/components/DataTable';
 	import type { Tables } from '$lib/db/types.js';
+	import { TodayKPI } from './lib';
 
 	let { data } = $props();
 	let filters = $state(data.waves.filters);
@@ -41,6 +42,8 @@
 
 <div class="flex flex-col w-full h-full p-2 lg:p-8">
 	<h1 class="h1 font-bold">Waves</h1>
+	<TodayKPI wavesToday={data.wavesToday}></TodayKPI>
+
 	<div class="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-24 w-full h-fit">
 		<div class="flex lg:col-span-2 w-full">
 			<Table bind:tableStore>

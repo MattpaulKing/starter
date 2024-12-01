@@ -8,7 +8,7 @@
 			{filterCount}
 		</span>
 	{/if}
-	<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path
 			d="M5 7H27L18.5 16L18 24.5L14 27.5V20.5L13.5 16.5L9.5 12L5 7Z"
 			class="fill-black {classes}"
