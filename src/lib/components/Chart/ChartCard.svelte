@@ -36,13 +36,17 @@
 			{#snippet title()}
 				Chart Options
 			{/snippet}
+			<OptionsMenuItem>
+				<img src="/Info.png" class="dark:invert w-6 h-6" alt="icon" />
+				<span>Info</span>
+			</OptionsMenuItem>
 			<OptionsMenuItem onclick={exportImg}>
 				<img src="/Image.png" class="dark:invert w-6 h-6" alt="icon" />
 				<span class="whitespace-nowrap w-fit">Save Picture</span>
 			</OptionsMenuItem>
-			<OptionsMenuItem>
-				<img src="/Info.png" class="dark:invert w-6 h-6" alt="icon" />
-				<span>Info</span>
+			<OptionsMenuItem onclick={exportImg}>
+				<img src="/Download.png" class="dark:invert w-6 h-6" alt="icon" />
+				<span class="whitespace-nowrap w-fit">Export CSV</span>
 			</OptionsMenuItem>
 		</OptionsMenu>
 	</div>
