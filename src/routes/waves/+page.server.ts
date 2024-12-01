@@ -3,7 +3,9 @@ import { unwrapQuery, unwrapQueryAndCount } from "$lib/db/helpers";
 import type { Tables } from "$lib/db/types";
 import type { PageServerLoad } from "./$types";
 
-function getWaveAggsByTimeRange({ waveRows, range }: { waveRows: Pick<Tables<"waves">, "waveTs" | "waveHeight" | "swellDirection" | "wavePeriod">[], range: { min: number, max: number } }) {
+function getWaveAggsByTimeRange(
+  { waveRows, range }:
+    { waveRows: Pick<Tables<"waves">, "waveTs" | "waveHeight" | "swellDirection" | "wavePeriod">[], range: { min: number, max: number } }) {
   return waveRows.filter(({ waveTs }) => {
     let hours = new Date(waveTs).getHours()
     return hours >= range.min && hours <= range.max
@@ -26,10 +28,6 @@ export const load: PageServerLoad = async ({ locals: { db } }) => {
       .lt("waveTs", new Date(today.getUTCFullYear(), today.getUTCMonth(), today.getDate() + 1).toISOString())
       .order("swellHeight", { ascending: true })
       .then(unwrapQuery)
-      .then(x => {
-        console.dir(x, { depth: null })
-        return x
-      })
       .then(rows => ({
         beach: "sombrio",
         times: {

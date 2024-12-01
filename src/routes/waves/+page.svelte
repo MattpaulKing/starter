@@ -33,6 +33,9 @@
 		if (hour >= 13) {
 			hour -= 12;
 		}
+		if (hour === 0) {
+			hour = 12;
+		}
 		return `${days[e.getDay()]} ${hour} ${meridian}`;
 	}
 	let chartRows = $derived(
