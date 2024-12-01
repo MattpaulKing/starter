@@ -34,7 +34,7 @@
 				>
 					<span class="font-bold px-2">{@render title()}</span>
 					<hr class="" />
-					<ul class="[&>li>*]:text-sm w-fit">
+					<ul class="[&>li>*]:text-sm w-max">
 						{@render children()}
 					</ul>
 				</div>

@@ -6,8 +6,8 @@
 		$props();
 </script>
 
-<li class="w-max">
-	<button {onclick} class="btn btn-sm flex justify-start hover:variant-ghost">
+<li class="w-full">
+	<button {onclick} class="btn btn-sm w-full flex justify-start hover:variant-ghost">
 		{@render children()}
 	</button>
 </li>
