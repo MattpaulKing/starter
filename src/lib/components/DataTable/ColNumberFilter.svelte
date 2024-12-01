@@ -1,30 +1,31 @@
 <script lang="ts" generics="T extends Record<string, unknown>">
+	import type { Snippet } from 'svelte';
 	import { getColKey, type TableStore } from '.';
 
 	let {
 		tableStore = $bindable(),
-		label,
-		side
+		idx,
+		children
 	}: {
 		tableStore: TableStore<T>;
-		label: string;
-		side: 0 | 1;
+		idx: 0 | 1;
+		children: Snippet;
 	} = $props();
 
 	let key = getColKey() as keyof T;
-	let numberProxy = $state(tableStore.filters[key].values[side] as number);
+	let numberProxy = $state(tableStore.filters[key].values[idx] as number);
 
 	function updateFilter() {
 		tableStore.setNumberFilterValue({
 			col: key,
 			value: numberProxy,
-			valueIdx: side
+			valueIdx: idx
 		});
 	}
 </script>
 
 <label class="my-4">
-	<span>{label}</span>
+	{@render children()}
 	<input
 		type="number"
 		inputmode="tel"

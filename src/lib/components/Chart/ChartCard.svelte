@@ -2,6 +2,7 @@
 	import { OptionsMenu } from '../Buttons';
 	import html2canvas from 'html2canvas';
 	import type { Snippet } from 'svelte';
+	import OptionsMenuItem from '../Buttons/OptionsMenuItem.svelte';
 
 	let {
 		title,
@@ -32,22 +33,17 @@
 	<div class="grid ml-4 mr-2 grid-cols-[auto_1fr] items-start mb-4">
 		{@render title()}
 		<OptionsMenu bind:btnContainer>
-			<nav class="list-nav bg-surface-700 rounded-token absolute right-0 w-max h-fit z-10">
-				<ul class="[&>li>*]:text-sm">
-					<li class="">
-						<button onclick={exportImg} class="flex w-full">
-							<img src="/Image.png" class="dark:invert w-6 h-6" alt="icon" />
-							<span>Save Picture</span>
-						</button>
-					</li>
-					<li class="">
-						<button onclick={() => null} class="flex w-full">
-							<img src="/Info.png" class="dark:invert w-6 h-6" alt="icon" />
-							<span>Info</span>
-						</button>
-					</li>
-				</ul>
-			</nav>
+			{#snippet title()}
+				Chart Options
+			{/snippet}
+			<OptionsMenuItem onclick={exportImg}>
+				<img src="/Image.png" class="dark:invert w-6 h-6" alt="icon" />
+				<span class="whitespace-nowrap w-fit">Save Picture</span>
+			</OptionsMenuItem>
+			<OptionsMenuItem>
+				<img src="/Info.png" class="dark:invert w-6 h-6" alt="icon" />
+				<span>Info</span>
+			</OptionsMenuItem>
 		</OptionsMenu>
 	</div>
 	{@render children()}

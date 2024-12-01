@@ -46,24 +46,24 @@
 			<Table bind:tableStore>
 				{#snippet headers()}
 					<Th>
-						<ColMenu {tableStore} label="Date" key="waveTs">
-							<ColSortBtn {tableStore} label="Earliest to Latest" asc={true}></ColSortBtn>
-							<ColSortBtn {tableStore} label="Latest to Earliest" asc={false}></ColSortBtn>
+						<span>Date</span>
+						<ColMenu {tableStore} key="waveTs">
+							<ColSortBtn {tableStore} asc={true}>Earliest to Latest</ColSortBtn>
+							<ColSortBtn {tableStore} asc={false}>Latest to Earliest</ColSortBtn>
 							<hr class="my-2" />
-							<ColDateFilter label="Earliest Date" idx={0} bind:filter={filters.waveTs}
-							></ColDateFilter>
-							<ColDateFilter label="Latest Date" idx={1} bind:filter={filters.waveTs}
-							></ColDateFilter>
+							<ColDateFilter idx={0} bind:filter={filters.waveTs}>Earliest Date</ColDateFilter>
+							<ColDateFilter idx={1} bind:filter={filters.waveTs}>Latest Date</ColDateFilter>
 						</ColMenu>
 					</Th>
 					<Th>Time</Th>
 					<Th>
-						<ColMenu {tableStore} label="Wave Height (m)" key="waveHeight">
-							<ColSortBtn {tableStore} label="Smallest to Largest" asc={true}></ColSortBtn>
-							<ColSortBtn {tableStore} label="Largest to Smallest" asc={false}></ColSortBtn>
+						<span>Wave Height (m)</span>
+						<ColMenu {tableStore} key="waveHeight">
+							<ColSortBtn {tableStore} asc={true}>Smallest to Largest</ColSortBtn>
+							<ColSortBtn {tableStore} asc={false}>Largest to Smallest</ColSortBtn>
 							<hr class="my-2" />
-							<ColNumberFilter bind:tableStore label="Minimum" side={0}></ColNumberFilter>
-							<ColNumberFilter bind:tableStore label="Maximum" side={1}></ColNumberFilter>
+							<ColNumberFilter bind:tableStore idx={0}>Minimum</ColNumberFilter>
+							<ColNumberFilter bind:tableStore idx={1}>Maximum</ColNumberFilter>
 						</ColMenu>
 					</Th>
 				{/snippet}

@@ -2,19 +2,18 @@
 	import { RowCount, RowsPerView, Pagination } from '.';
 	import { OptionsMenu } from '../Buttons';
 	import { fade } from 'svelte/transition';
-	import type { Snippet } from 'svelte';
 	import { TableFilterBtn, type TableStore } from '.';
+	import type { Snippet } from 'svelte';
+	import OptionsMenuItem from '../Buttons/OptionsMenuItem.svelte';
 
 	let {
 		tableStore = $bindable(),
 		title,
-		// filterBtn,
 		headers,
 		row
 	}: {
 		tableStore: TableStore<T>;
 		title?: Snippet;
-		// filterBtn: Snippet;
 		headers: Snippet;
 		row: Snippet<[T]>;
 	} = $props();
@@ -30,18 +29,13 @@
 			<TableFilterBtn {tableStore}></TableFilterBtn>
 			<div></div>
 			<OptionsMenu>
-				<div class="card space-y-2 p-4 flex flex-col w-fit border border-surface-500-400-token">
-					<span class="font-bold">Options</span>
-					<hr class="" />
-					<ul class="[&>li>*]:text-sm w-full">
-						<li class="flex w-full">
-							<button class="btn flex w-full hover:variant-ghost">
-								<img src="/Download.png" class="dark:invert w-6 h-6" alt="icon" />
-								<span>Export</span>
-							</button>
-						</li>
-					</ul>
-				</div>
+				{#snippet title()}
+					Options
+				{/snippet}
+				<OptionsMenuItem>
+					<img src="/Download.png" class="dark:invert w-6 h-6" alt="icon" />
+					<span>Export CSV</span>
+				</OptionsMenuItem>
 			</OptionsMenu>
 		</div>
 	</header>

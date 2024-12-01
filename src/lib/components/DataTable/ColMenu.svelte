@@ -5,12 +5,10 @@
 	import type { Snippet } from 'svelte';
 	let {
 		tableStore,
-		label,
 		key,
 		children
 	}: {
 		tableStore: TableStore<T>;
-		label: string;
 		key: keyof T & string;
 		children: Snippet;
 	} = $props();
@@ -25,12 +23,11 @@
 </script>
 
 <div
-	class="flex h-full place-items-center"
+	class="flex ml-4 h-full place-items-center"
 	use:clickOutside={() => {
 		dropdownOpen = false;
 	}}
 >
-	<span class="mr-4">{label}</span>
 	<button
 		onclick={handleDropdown}
 		class="{tableStore.filters || tableStore.sort?.by === key
@@ -41,8 +38,7 @@
 	<div class="absolute z-50 h-0 w-0">
 		{#if dropdownOpen}
 			<div transition:fade class="card absolute left-1/2 top-4 z-30 w-fit min-w-72 flex-col p-4">
-				<div class="flex justify-between mb-4 place-items-center">
-					<span class="font-bold text-xl">{label}</span>
+				<div class="flex justify-end mb-4 place-items-center">
 					<button onclick={resetFilters} class="btn btn-sm variant-ghost hover:variant-filled-error"
 						>Clear</button
 					>

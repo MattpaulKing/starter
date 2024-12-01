@@ -1,13 +1,14 @@
 <script lang="ts" generics="T extends Record<string, unknown>">
+	import type { Snippet } from 'svelte';
 	import { getColKey, type TableStore } from '.';
 	let {
 		tableStore,
-		label,
-		asc
+		asc,
+		children
 	}: {
 		tableStore: TableStore<T>;
-		label: string;
 		asc: boolean;
+		children: Snippet;
 	} = $props();
 	let key = getColKey() as keyof T;
 </script>
@@ -24,5 +25,5 @@
 		class="dark:invert {asc ? '' : 'rotate-180'}"
 		alt={asc ? 'arrow-up' : 'arrow-down'}
 	/>
-	<span>{label}</span>
+	{@render children()}
 </button>

@@ -1,14 +1,15 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import type { FilterDateRange } from './TableStore.svelte';
 
 	let {
 		filter = $bindable(),
 		idx,
-		label
+		children
 	}: {
 		filter: FilterDateRange;
 		idx: number;
-		label: string;
+		children: Snippet;
 	} = $props();
 
 	function updateFilter() {
@@ -18,7 +19,7 @@
 </script>
 
 <label class="my-4">
-	<span>{label}</span>
+	{@render children()}
 	<input
 		type="date"
 		class="input"
